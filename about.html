@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A&T Technical Services — About Us. Learn about our mission, vision, and the expert team behind our world-class execution."/>
+    <title>About Us | A&T Technical Services</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-hero {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+        }
+        .about-hero video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .about-hero-veil {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 5%;
+        }
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .about-intro {
+            padding: 8rem 0;
+            background: var(--bg);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-img img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 991px) {
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-hero { height: 50vh; }
+        }
+    </style>
+</head>
+<body class="dark-mode" id="body">
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ========== HEADER ========== -->
+    <header class="site-header solid" id="header">
+        <div class="header-wrap">
+            <a href="index.html" class="logo" aria-label="Home">
+                <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
+                <div class="logo-text">
+                    <span class="logo-name">Technical Services</span>
+                    <span class="logo-tag">Dubai to the World</span>
+                </div>
+            </a>
+            <nav class="desktop-nav" aria-label="Main">
+                <a href="service.html?service=events" class="nav-item">Events</a>
+                <a href="service.html?service=exhibitions" class="nav-item">Exhibitions</a>
+                <a href="service.html?service=fitout" class="nav-item">Fitout</a>
+                <a href="service.html?service=signages" class="nav-item">Signages and Large Format Printing</a>
+                <a href="service.html?service=manufacturing" class="nav-item">Manufacture</a>
+                <div class="nav-dropdown">
+                    <button class="nav-item drop-trigger" aria-haspopup="true">
+                        Rentals <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <ul class="drop-menu" role="menu">
+                        <li><a href="rentals.html?cat=furniture" role="menuitem"><i class="fa-solid fa-couch"></i>Furniture</a></li>
+                        <li><a href="rentals.html?cat=devices" role="menuitem"><i class="fa-solid fa-laptop"></i>Devices</a></li>
+                        <li><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="header-right">
+                <button id="themeBtn" class="hdr-btn"><i class="fa-solid fa-sun" id="themeIco"></i></button>
+                <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
+                <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+        <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+        <nav class="drawer-nav">
+            <a href="service.html?service=events" class="drawer-link">Events</a>
+            <a href="service.html?service=exhibitions" class="drawer-link">Exhibitions</a>
+            <a href="service.html?service=fitout" class="drawer-link">Fitout</a>
+            <a href="service.html?service=signages" class="drawer-link">Signages and Large Format Printing</a>
+            <a href="service.html?service=manufacturing" class="drawer-link">Manufacture</a>
+            <div class="drawer-acc">
+                <button class="drawer-link drawer-acc-trigger" id="drawerRentals" aria-expanded="false">
+                    Rentals <i class="fa-solid fa-angle-down drag-angle"></i>
+                </button>
+                <div class="drawer-acc-body" id="drawerRentalsBody">
+                    <a href="rentals.html?cat=furniture" class="drawer-sub"><i class="fa-solid fa-couch"></i> Furniture</a>
+                    <a href="rentals.html?cat=devices" class="drawer-sub"><i class="fa-solid fa-laptop"></i> Devices</a>
+                    <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
+                </div>
+            </div>
+        </nav>
+        <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <!-- ========== ABOUT HERO ========== -->
+    <section class="about-hero">
+        <video id="aboutHeroVideo" autoplay muted loop playsinline poster="assets/about-poster.jpg">
+            <source src="hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="about-hero-veil"></div>
+        <div class="about-hero-content" data-reveal>
+            <h1>Our Vision &amp; Team</h1>
+            <p class="hero-desc">Building the future of event and interior execution, from Dubai to the world.</p>
+        </div>
+    </section>
+
+    <!-- ========== INTRO SECTION ========== -->
+    <section class="about-intro">
+        <div class="wrap">
+            <div class="about-grid">
+                <div class="about-text" data-reveal>
+                    <div class="sec-label"><span></span> Who We Are</div>
+                    <h2>Design-Led Execution<br>Without Compromise</h2>
+                    <p>A&amp;T Technical Services is a premier design, production, and execution company based in Dubai. We specialize in creating immersive environments that bridge the gap between creative vision and physical reality.</p>
+                    <p>With our in-house manufacturing capabilities across carpentry, steel, and large-format printing, we ensure that every project is delivered with the highest standards of quality and precision.</p>
+                </div>
+                <div class="about-img" data-reveal data-delay="100">
+                    <img id="aboutWorkshopImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80" alt="A&T Workshop">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TEAM SECTION ========== -->
+    <section class="team-section">
+        <div class="wrap">
+            <div class="sec-head" data-reveal>
+                <div class="sec-label"><span></span> Our Team</div>
+                <h2>The Force Behind<br>the Execution</h2>
+                <p class="sec-subtitle">Meet the specialized professionals who bring world-class projects to life.</p>
+            </div>            <div class="team-grid" id="teamGrid"></div>
+            <script>
+                (async function() {
+                    const grid = document.getElementById('teamGrid');
+                    if (!grid) return;
+                    try {
+                        const team = await fetchSanity('*[_type == "teamMember"]');
+                        
+                        team.forEach((m, i) => {
+                            const card = document.createElement('div');
+                            card.className = 'team-card';
+                            card.setAttribute('data-reveal', '');
+                            card.style.setProperty('--delay', (i % 4) * 100 + 'ms');
+                            card.innerHTML = `
+                                <div class="team-img-wrap">
+                                    <i class="fa-solid fa-quote-left team-quote-lg"></i>
+                                    <img src="${buildSanityImageUrl(m.image)}" alt="${m.name}" loading="lazy">
+                                </div>
+                                <div class="team-info">
+                                    <h3>${m.name}</h3>
+                                    <p class="position">${m.position}</p>
+                                    <div class="team-bio">
+                                        ${m.bio}<i class="fa-solid fa-quote-right team-quote-sm"></i>
+                                    </div>
+                                </div>
+                            `;
+                            grid.appendChild(card);
+                        });
+                        // Initialize reveal for dynamic elements
+                        if (window.observer) {
+                           document.querySelectorAll('#teamGrid [data-reveal]').forEach(el => window.observer.observe(el));
+                        }
+                    } catch (e) { console.error('Team load error:', e); }
+                })();
+            </script>
+
+            <!-- Mobile Carousel Nav -->
+            <div class="team-nav-mobile">
+                <button class="team-nav-btn" onclick="document.getElementById('teamGrid').scrollBy({left: -280, behavior: 'smooth'})">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="team-nav-btn" onclick="document.getElementById('teamGrid').scrollBy({left: 280, behavior: 'smooth'})">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>v>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="wrap footer-wrap">
+            <div class="footer-brand">
+                <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
+                <p>Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/at.technicalservices/" class="soc-btn soc-instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/atseventsae/" class="soc-btn soc-facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/aandttechnicalservices/" class="soc-btn soc-linkedin" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@aandttechnicalservices" class="soc-btn soc-youtube" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#gallery">Projects</a>
+                <a href="index.html#quote">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="terms.html">Terms of Service</a>
+                <a href="policy.html">Our Policies</a>
+                <a href="policy.html">Privacy Policy</a>
+                <a href="admin-v2.html">Admin Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Our Location</h4>
+                <p><a href="https://maps.app.goo.gl/SwW2omSGuhX5GkeP9" target="_blank" rel="noopener noreferrer" style="color: inherit;" class="cms-location-link"><i class="fa-solid fa-location-dot"></i> <span class="cms-location">Al Kawakeb warehouse no. 5, Alquoz Industrial area 2, Dubai, UAE</span></a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@at-s.ae" class="cms-email" style="color: inherit; text-decoration: none;">info@at-s.ae</a></p>
+                <p><i class="fa-solid fa-phone"></i> <span class="cms-phone">+971 58 103 4611</span></p>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <p>&copy; 2026 A&T Technical Services. All rights reserved.</p>
+            <p class="footer-motto">Dubai to the World <span class="red">•</span></p>
+        </div>
+    </footer>
+
+    <script src="sanityClient.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

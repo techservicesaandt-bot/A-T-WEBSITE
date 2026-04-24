@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A&T Technical Services — Furniture & Device Rentals. Premium chairs, sofas, tables, devices and more for events and exhibitions in Dubai.">
+    <title>A&T — Furniture &amp; Device Rentals</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="rentals.css">
+</head>
+<body class="dark-mode" id="body">
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ========== HEADER ========== -->
+    <header class="site-header solid" id="header">
+        <div class="header-wrap">
+            <a href="index.html" class="logo" aria-label="Home">
+                <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
+                <div class="logo-text">
+                    <span class="logo-name">Technical Services</span>
+                    <span class="logo-tag">Dubai to the World</span>
+                </div>
+            </a>
+            <nav class="desktop-nav" aria-label="Main">
+                <a href="service.html?service=events" class="nav-item">Events</a>
+                <a href="service.html?service=exhibitions" class="nav-item">Exhibitions</a>
+                <a href="service.html?service=fitout" class="nav-item">Fitout</a>
+                <a href="service.html?service=signages" class="nav-item">Signages</a>
+                <a href="service.html?service=manufacturing" class="nav-item">Manufacture</a>
+                <div class="nav-dropdown">
+                    <button class="nav-item drop-trigger" aria-haspopup="true">
+                        Rentals <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <ul class="drop-menu" role="menu">
+                        <li><a href="rentals.html?cat=furniture" role="menuitem"><i class="fa-solid fa-couch"></i>Furniture</a></li>
+                        <li><a href="rentals.html?cat=devices" role="menuitem"><i class="fa-solid fa-laptop"></i>Devices</a></li>
+                        <li><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="header-right">
+                <button id="themeBtn" class="hdr-btn"><i class="fa-solid fa-sun" id="themeIco"></i></button>
+                <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
+                <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+        <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+        <nav class="drawer-nav">
+            <a href="service.html?service=events" class="drawer-link">Events</a>
+            <a href="service.html?service=exhibitions" class="drawer-link">Exhibitions</a>
+            <a href="service.html?service=fitout" class="drawer-link">Fitout</a>
+            <a href="service.html?service=signages" class="drawer-link">Signages</a>
+            <a href="service.html?service=manufacturing" class="drawer-link">Manufacture</a>
+            <div class="drawer-acc">
+                <button class="drawer-link drawer-acc-trigger" id="drawerRentals" aria-expanded="false">
+                    Rentals <i class="fa-solid fa-angle-down drag-angle"></i>
+                </button>
+                <div class="drawer-acc-body" id="drawerRentalsBody">
+                    <a href="rentals.html?cat=furniture" class="drawer-sub"><i class="fa-solid fa-couch"></i> Furniture</a>
+                    <a href="rentals.html?cat=devices" class="drawer-sub"><i class="fa-solid fa-laptop"></i> Devices</a>
+                    <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
+                </div>
+            </div>
+        </nav>
+        <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="rentals-hero">
+        <div class="rh-bg"></div>
+        <div class="rh-veil"></div>
+        <div class="wrap rh-inner">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <div class="rh-content" data-reveal>
+                <div class="sec-label"><span></span>Rentals</div>
+                <h1>Furniture &amp;<br>Device Rentals</h1>
+                <p>Premium branded furniture and professional equipment for your events, exhibitions, and corporate spaces — delivered, set up, and collected by A&amp;T.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MAIN LAYOUT ========== -->
+    <div class="rentals-layout" id="rentalsLayout">
+
+        <!-- ====== LEFT SIDEBAR — Categories ====== -->
+        <aside class="rentals-sidebar" id="rentalsSidebar" aria-label="Filter by category">
+            <div class="sidebar-sticky">
+                <h3 class="sidebar-title">Categories</h3>
+                <nav class="cat-nav" role="navigation">
+                    <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-border-all"></i><span>All Items</span><span class="cat-count" id="cnt-all">0</span></button>
+                    <div class="cat-group-label">Furniture</div>
+                    <button class="cat-btn" data-cat="chairs"><i class="fa-solid fa-chair"></i><span>Chairs</span><span class="cat-count" id="cnt-chairs">0</span></button>
+                    <button class="cat-btn" data-cat="sofas"><i class="fa-solid fa-couch"></i><span>Sofas</span><span class="cat-count" id="cnt-sofas">0</span></button>
+                    <button class="cat-btn" data-cat="barstools"><i class="fa-solid fa-wine-glass"></i><span>Barstools</span><span class="cat-count" id="cnt-barstools">0</span></button>
+                    <button class="cat-btn" data-cat="tables"><i class="fa-solid fa-table"></i><span>Tables</span><span class="cat-count" id="cnt-tables">0</span></button>
+                    <button class="cat-btn" data-cat="office"><i class="fa-solid fa-briefcase"></i><span>Office</span><span class="cat-count" id="cnt-office">0</span></button>
+                    <button class="cat-btn" data-cat="another items"><i class="fa-solid fa-plus-circle"></i><span>Others</span><span class="cat-count" id="cnt-another-items">0</span></button>
+                    <div class="cat-group-label">Equipment</div>
+                    <button class="cat-btn" data-cat="devices"><i class="fa-solid fa-laptop"></i><span>Devices</span><span class="cat-count" id="cnt-devices">0</span></button>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- ====== RIGHT — Product Grid ====== -->
+        <main class="rentals-main" id="rentalsMain">
+            <div class="rentals-topbar">
+                <p class="results-text" id="resultsText">Loading…</p>
+                <button class="mobile-filter-btn btn-pill btn-outline" id="mobileFilterBtn"><i class="fa-solid fa-sliders"></i> Filter</button>
+            </div>
+            <div class="mobile-cats" id="mobileCats" aria-hidden="true">
+               <!-- Mobile filters injected by JS or hardcoded -->
+            </div>
+            <div class="product-grid" id="productGrid" role="list"></div>
+        </main>
+    </div>
+
+    <!-- ========== BOOKING MODAL ========== -->
+    <div class="booking-modal" id="bookingModal" hidden>
+        <div class="bm-backdrop" id="bmBackdrop"></div>
+        <div class="bm-panel glass-card" id="bmPanel">
+            <button class="bm-close" id="bmClose"><i class="fa-solid fa-xmark"></i></button>
+            <div class="bm-item-preview" id="bmPreview">
+                <img src="" alt="" id="bmThumb" class="bm-thumb">
+                <div class="bm-item-info">
+                    <span id="bmCatTag" class="bm-cat"></span>
+                    <h3 id="bmItemName"></h3>
+                </div>
+            </div>
+            <form id="bookingForm" class="bm-form">
+                <div class="bm-section">
+                    <label class="bm-label">Quantity</label>
+                    <div class="quantity-row">
+                        <button type="button" class="qty-btn" id="bmQtyMinus">-</button>
+                        <span class="qty-value" id="bmQtyValue">1</span>
+                        <button type="button" class="qty-btn" id="bmQtyPlus">+</button>
+                    </div>
+                </div>
+                <!-- Other fields... -->
+                <button type="submit" class="btn-pill btn-red btn-full">Confirm Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="wrap footer-wrap">
+            <div class="footer-brand">
+                <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; filter: brightness(0) invert(1);">
+                <p>Dubai-based design, production and execution company delivering world-class environments.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#gallery">Projects</a>
+                <a href="index.html#quote">Contact Us</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="policy.html">Our Policies</a>
+                <a href="admin-v2.html">Admin Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Our Location</h4>
+                <p><i class="fa-solid fa-location-dot"></i> <span>Al Kawakeb warehouse no. 5, Alquoz Industrial area 2, Dubai, UAE</span></p>
+                <p><i class="fa-solid fa-envelope"></i> <span>info@at-s.ae</span></p>
+                <p><i class="fa-solid fa-phone"></i> <span>+971 58 103 4611</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="sanityClient.js"></script>
+    <script src="script.js"></script>
+    <script src="rentals.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A&T Technical Services — Our Services. Discover our full range of design, production and execution services across Dubai and the world."/>
+    <title>Our Services | A&T Technical Services</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .services-hero {
+            padding: 8rem 0 4rem;
+            background: var(--bg2);
+            text-align: center;
+        }
+        .services-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .services-detail-list {
+            padding: 8rem 0;
+            background: var(--bg);
+        }
+        .service-detail-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-bottom: 10rem;
+        }
+        .service-detail-item:nth-child(even) {
+            direction: rtl;
+        }
+        .service-detail-item:nth-child(even) .service-detail-content {
+            direction: ltr; /* Reset text direction for content */
+        }
+        .service-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-detail-media img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+        .service-detail-content h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        .service-detail-content p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .service-features {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .service-features i {
+            color: var(--red);
+        }
+
+        @media (max-width: 991px) {
+            .service-detail-item {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                margin-bottom: 7rem;
+            }
+            .service-detail-item:nth-child(even) {
+                direction: ltr;
+            }
+            .service-detail-content h2 { font-size: 2.2rem; }
+            .service-features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="dark-mode" id="body">
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ========== HEADER ========== -->
+    <header class="site-header solid" id="header">
+        <div class="header-wrap">
+            <a href="index.html" class="logo" aria-label="Home">
+                <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
+                <div class="logo-text">
+                    <span class="logo-name">Technical Services</span>
+                    <span class="logo-tag">Dubai to the World</span>
+                </div>
+            </a>
+            <nav class="desktop-nav" aria-label="Main">
+                <a href="service.html?service=events" class="nav-item">Events</a>
+                <a href="service.html?service=exhibitions" class="nav-item">Exhibitions</a>
+                <a href="service.html?service=fitout" class="nav-item">Fitout</a>
+                <a href="service.html?service=signages" class="nav-item">Signages and Large Format Printing</a>
+                <a href="service.html?service=manufacturing" class="nav-item">Manufacture</a>
+                <div class="nav-dropdown">
+                    <button class="nav-item drop-trigger" aria-haspopup="true">
+                        Rentals <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <ul class="drop-menu" role="menu">
+                        <li><a href="rentals.html?cat=furniture" role="menuitem"><i class="fa-solid fa-couch"></i>Furniture</a></li>
+                        <li><a href="rentals.html?cat=devices" role="menuitem"><i class="fa-solid fa-laptop"></i>Devices</a></li>
+                        <li><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="header-right">
+                <button id="themeBtn" class="hdr-btn"><i class="fa-solid fa-sun" id="themeIco"></i></button>
+                <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
+                <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+        <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+        <nav class="drawer-nav">
+            <a href="service.html?service=events" class="drawer-link">Events</a>
+            <a href="service.html?service=exhibitions" class="drawer-link">Exhibitions</a>
+            <a href="service.html?service=fitout" class="drawer-link">Fitout</a>
+            <a href="service.html?service=signages" class="drawer-link">Signages and Large Format Printing</a>
+            <a href="service.html?service=manufacturing" class="drawer-link">Manufacture</a>
+            <div class="drawer-acc">
+                <button class="drawer-link drawer-acc-trigger" id="drawerRentals" aria-expanded="false">
+                    Rentals <i class="fa-solid fa-angle-down drag-angle"></i>
+                </button>
+                <div class="drawer-acc-body" id="drawerRentalsBody">
+                    <a href="rentals.html?cat=furniture" class="drawer-sub"><i class="fa-solid fa-couch"></i> Furniture</a>
+                    <a href="rentals.html?cat=devices" class="drawer-sub"><i class="fa-solid fa-laptop"></i> Devices</a>
+                    <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
+                </div>
+            </div>
+        </nav>
+        <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <!-- ========== HERO ========== -->
+    <section class="services-hero">
+        <div class="wrap" data-reveal>
+            <h1>Our Specialized<br>Services</h1>
+            <p class="sec-subtitle">Comprehensive design, production, and execution solutions tailored to your unique requirements.</p>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES LIST ========== -->
+    <section class="services-detail-list">
+        <div class="wrap">
+
+            <!-- Events -->
+            <div class="service-detail-item" data-reveal>
+                <div class="service-detail-media">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80" alt="Event Execution">
+                </div>
+                <div class="service-detail-content">
+                    <div class="sec-label"><span></span> Large Scale</div>
+                    <h2>Events</h2>
+                    <p>From corporate conferences to massive music festivals, we handle the end-to-end execution of temporary environments. Our team creates stunning stages, VIP lounges, and interactive activation zones that leave a lasting impression.</p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Stage Design & Construction</li>
+                        <li><i class="fa-solid fa-check"></i> VIP & Hospitality Build</li>
+                        <li><i class="fa-solid fa-check"></i> Activation Zones</li>
+                        <li><i class="fa-solid fa-check"></i> On-site Technical Support</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;">
+                        <a href="service.html?service=events" class="btn-pill btn-red">View Event Projects</a>
+                        <a href="index.html#quote" class="btn-pill btn-outline">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exhibitions -->
+            <div class="service-detail-item" data-reveal>
+                <div class="service-detail-media">
+                    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200&q=80" alt="Exhibition Stands">
+                </div>
+                <div class="service-detail-content">
+                    <div class="sec-label"><span></span> Award Winning</div>
+                    <h2>Exhibitions</h2>
+                    <p>We design and build custom exhibition stands that help brands stand out in crowded arenas. Our approach combines architectural design with marketing strategic thinking to maximize engagement and visitor flow.</p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Double-Decker Stands</li>
+                        <li><i class="fa-solid fa-check"></i> Interactive Pavilions</li>
+                        <li><i class="fa-solid fa-check"></i> Turnkey Project Management</li>
+                        <li><i class="fa-solid fa-check"></i> Modular Exhibition Kits</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;">
+                        <a href="service.html?service=exhibitions" class="btn-pill btn-red">View Exhibition Projects</a>
+                        <a href="index.html#quote" class="btn-pill btn-outline">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fitout -->
+            <div class="service-detail-item" data-reveal>
+                <div class="service-detail-media">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80" alt="Interior Fitout">
+                </div>
+                <div class="service-detail-content">
+                    <div class="sec-label"><span></span> Interior Design</div>
+                    <h2>Fitout</h2>
+                    <p>High-end interior fitout solutions for retail, office, and hospitality sectors. We manage the entire process from conceptual design to civil works, furniture installation, and final finishing.</p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Commercial & Corporate</li>
+                        <li><i class="fa-solid fa-check"></i> Retail & Hospitality</li>
+                        <li><i class="fa-solid fa-check"></i> Custom Furniture</li>
+                        <li><i class="fa-solid fa-check"></i> Civil & MEP Works</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;">
+                        <a href="service.html?service=fitout" class="btn-pill btn-red">View Fitout Projects</a>
+                        <a href="index.html#quote" class="btn-pill btn-outline">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signages -->
+            <div class="service-detail-item" data-reveal>
+                <div class="service-detail-media">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=1200&q=80" alt="Large Format Printing">
+                </div>
+                <div class="service-detail-content">
+                    <div class="sec-label"><span></span> Visual Impact</div>
+                    <h2>Signages &amp; Print</h2>
+                    <p>Our in-house large format printing center delivers vibrant, high-resolution graphics and custom signage. From architectural wrapping to LED letterforms, we handle all your visual communication needs.</p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> 3D Built-up Signages</li>
+                        <li><i class="fa-solid fa-check"></i> Large Format Digital Print</li>
+                        <li><i class="fa-solid fa-check"></i> Vehicle & Building Wrap</li>
+                        <li><i class="fa-solid fa-check"></i> Wayfinding Systems</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;">
+                        <a href="service.html?service=signages" class="btn-pill btn-red">View Signage Projects</a>
+                        <a href="index.html#quote" class="btn-pill btn-outline">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manufacturing -->
+            <div class="service-detail-item" data-reveal>
+                <div class="service-detail-media">
+                    <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80" alt="Custom Manufacturing">
+                </div>
+                <div class="service-detail-content">
+                    <div class="sec-label"><span></span> Master Craftsmanship</div>
+                    <h2>Manufacturing</h2>
+                    <p>Our workshop is the heart of A&amp;T. We offer bespoke manufacturing in wood, metal, acrylic, and fiberglass. If it can be designed, we can build it — with no external reliance for quality control.</p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> In-house Carpentry</li>
+                        <li><i class="fa-solid fa-check"></i> Metal & Steel Works</li>
+                        <li><i class="fa-solid fa-check"></i> Acrylic & Plastic Fab</li>
+                        <li><i class="fa-solid fa-check"></i> Prototyping & QC</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;">
+                        <a href="service.html?service=manufacturing" class="btn-pill btn-red">View Manufacture Projects</a>
+                        <a href="index.html#quote" class="btn-pill btn-outline">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="wrap footer-wrap">
+            <div class="footer-brand">
+                <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
+                <p>Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/at.technicalservices/" class="soc-btn soc-instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/atseventsae/" class="soc-btn soc-facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/aandttechnicalservices/" class="soc-btn soc-linkedin" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@aandttechnicalservices" class="soc-btn soc-youtube" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#gallery">Projects</a>
+                <a href="index.html#quote">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="terms.html">Terms of Service</a>
+                <a href="policy.html">Our Policies</a>
+                <a href="policy.html">Privacy Policy</a>
+                <a href="dashboard.html">Admin Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Our Location</h4>
+                <p><a href="https://maps.app.goo.gl/SwW2omSGuhX5GkeP9" target="_blank" rel="noopener noreferrer" style="color: inherit;" class="cms-location-link"><i class="fa-solid fa-location-dot"></i> <span class="cms-location">Al Kawakeb warehouse no. 5, Alquoz Industrial area 2, Dubai, UAE</span></a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@at-s.ae" class="cms-email" style="color: inherit; text-decoration: none;">info@at-s.ae</a></p>
+                <p><i class="fa-solid fa-phone"></i> <span class="cms-phone">+971 58 103 4611</span></p>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <p>&copy; 2026 A&T Technical Services. All rights reserved.</p>
+            <p class="footer-motto">Dubai to the World <span class="red">•</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A&T Technical Services — Dubai's premier design, production and execution company. Exhibitions, events, interiors, branding, and custom manufacturing. Dubai to the world.">
+    <title>A&T Technical Services | Dubai to the World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode" id="body">
+
+    <!-- ========== CURSOR ========== -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ========== HEADER ========== -->
+    <header class="site-header" id="header">
+        <div class="header-wrap">
+            <!-- Logo -->
+            <a href="#" class="logo" aria-label="A&T Technical Services">
+                <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
+                <div class="logo-text">
+                    <span class="logo-name">Technical Services</span>
+                    <span class="logo-tag">Dubai to the World</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="desktop-nav" aria-label="Main">
+                <a href="service.html?service=events" class="nav-item">Events</a>
+                <a href="service.html?service=exhibitions" class="nav-item">Exhibitions</a>
+                <a href="service.html?service=fitout" class="nav-item">Fitout</a>
+                <a href="service.html?service=signages" class="nav-item">Signages and Large Format Printing</a>
+                <a href="service.html?service=manufacturing" class="nav-item">Manufacture</a>
+                <div class="nav-dropdown" id="rentalsDropdown">
+                    <button class="nav-item drop-trigger" aria-haspopup="true" aria-expanded="false">
+                        Rentals <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
+                    </button>
+                    <ul class="drop-menu" role="menu">
+                        <li role="none"><a href="rentals.html?cat=furniture" role="menuitem"><i class="fa-solid fa-couch"></i>Furniture</a></li>
+                        <li role="none"><a href="rentals.html?cat=devices" role="menuitem"><i class="fa-solid fa-laptop"></i>Devices</a></li>
+                        <li role="none"><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right -->
+            <div class="header-right">
+
+                <button id="themeBtn" class="hdr-btn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun" id="themeIco"></i>
+                </button>
+                <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link">
+                    <i class="fa-solid fa-phone"></i> Call Us
+                </a>
+                <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MOBILE DRAWER ========== -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+        <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <nav class="drawer-nav" aria-label="Mobile">
+            <a href="service.html?service=events" class="drawer-link">Events</a>
+            <a href="service.html?service=exhibitions" class="drawer-link">Exhibitions</a>
+            <a href="service.html?service=fitout" class="drawer-link">Fitout</a>
+            <a href="service.html?service=signages" class="drawer-link">Signages and Large Format Printing</a>
+            <a href="service.html?service=manufacturing" class="drawer-link">Manufacture</a>
+            <div class="drawer-acc">
+                <button class="drawer-link drawer-acc-trigger" id="drawerRentals" aria-expanded="false">
+                    Rentals <i class="fa-solid fa-angle-down drag-angle"></i>
+                </button>
+                <div class="drawer-acc-body" id="drawerRentalsBody">
+                    <a href="rentals.html?cat=furniture" class="drawer-sub"><i class="fa-solid fa-couch"></i> Furniture</a>
+                    <a href="rentals.html?cat=devices" class="drawer-sub"><i class="fa-solid fa-laptop"></i> Devices</a>
+                    <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
+                </div>
+            </div>
+        </nav>
+        <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link">
+            <i class="fa-solid fa-phone"></i> Call Us
+        </a>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="home">
+        <!-- background video -->
+        <div class="hero-video-wrap">
+            <video id="heroVideo" autoplay muted loop playsinline
+                poster="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=2000">
+                <source src="hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-veil"></div>
+        </div>
+
+        <!-- Decorative vertical text -->
+        <div class="hero-side-text" aria-hidden="true" id="homeSideText">DESIGN · PRODUCE · EXECUTE</div>
+
+        <!-- Main copy — bottom left -->
+        <div class="hero-copy" data-reveal>
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span id="homeBadgeText">Dubai to the World</span>
+            </div>
+            <!-- Removed overlapping hero text for mobile optimization -->
+            <div class="hero-intro" id="heroIntro">
+                <div class="intro-text-wrap">
+                    <h1 id="welcomeText">Welcome</h1>
+                </div>
+                <div class="intro-logo-wrap">
+                    <img src="/triangle.svg" alt="A&T Logo" id="welcomeLogo">
+                </div>
+            </div>
+            <p class="hero-desc" id="homeDesc">
+                A&amp;T Technical Services is a design-led company creating exhibitions,
+                events, interiors, branding, and custom-built environments — from concept
+                to final installation, all under one roof.
+            </p>
+        </div>
+
+        <!-- Bottom right CTA -->
+        <div class="hero-cta" data-reveal data-delay="180">
+            <div class="hero-stat glass-card">
+                <div class="stat-avatars">
+                    <img src="https://i.pravatar.cc/80?img=5"  alt="" loading="lazy">
+                    <img src="https://i.pravatar.cc/80?img=18" alt="" loading="lazy">
+                    <img src="https://i.pravatar.cc/80?img=27" alt="" loading="lazy">
+                    <span class="stat-plus">+</span>
+                </div>
+                <p><strong id="homeClientStat">500+</strong> <span id="homeClientText">satisfied clients worldwide</span></p>
+            </div>
+            <a href="#quote" class="btn-pill btn-white btn-lg">
+                Get a Quote <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="https://drive.google.com/file/d/1hTLar8FqXUV2ehaJtoE_AMmPtYQP9jdC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-pill btn-outline btn-lg" style="border-color:rgba(255,255,255,0.35);color:#fff;">
+                <i class="fa-solid fa-download"></i> Download Our Company Profile
+            </a>
+        </div>
+
+    </section>
+
+    <!-- ========== CLIENT LOGOS MARQUEE (Dual Motion) ========== -->
+    <section class="client-marquee-section" id="clients">
+        <div class="marquee-group">
+            <div class="marquee-row marquee-row--ltr">
+                <div class="marquee-row-inner" id="partnerTrack1">
+                    <!-- Partner logos will be loaded from Sanity -->
+                </div>
+            </div>
+            <div class="marquee-row marquee-row--rtl">
+                <div class="marquee-row-inner" id="partnerTrack2">
+                    <!-- Partner logos will be loaded from Sanity -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section class="services-section" id="services">
+        <div class="wrap">
+            <div class="svc-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                <div class="sec-label">Our Services</div>
+                <!-- Navigation Buttons (Mobile Focused) -->
+                <div class="svc-nav-btns" style="display: flex; gap: 10px;">
+                    <button id="svcPrev" class="btn-pill" aria-label="Scroll left" style="width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button id="svcNext" class="btn-pill" aria-label="Scroll right" style="width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; background: var(--red); border: none; color: #fff;">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="svc-grid-v2" id="svcGrid">
+                <!-- Row 1 -->
+                <a href="service.html?service=events" class="svc-card-v2" data-reveal>
+                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80" alt="Events" loading="lazy"></div>
+                    <div class="svc-card-info">
+                        <div class="svc-card-meta"><span>By A&T</span> • <span>Events</span></div>
+                        <h3>Large Scale Events</h3>
+                    </div>
+                </a>
+                <a href="service.html?service=exhibitions" class="svc-card-v2" data-reveal data-delay="80">
+                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200&q=80" alt="Exhibitions" loading="lazy"></div>
+                    <div class="svc-card-info">
+                        <div class="svc-card-meta"><span>By A&T</span> • <span>Portfolio</span></div>
+                        <h3>Award-Winning Exhibitions</h3>
+                    </div>
+                </a>
+                <a href="service.html?service=fitout" class="svc-card-v2" data-reveal data-delay="160">
+                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80" alt="Fitout" loading="lazy"></div>
+                    <div class="svc-card-info">
+                        <div class="svc-card-meta"><span>By A&T</span> • <span>Interior</span></div>
+                        <h3>Premium Fitout Solutions</h3>
+                    </div>
+                </a>
+                <!-- Row 2 -->
+                <a href="service.html?service=signages" class="svc-card-v2" data-reveal>
+                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=1200&q=80" alt="Signages" loading="lazy"></div>
+                    <div class="svc-card-info">
+                        <div class="svc-card-meta"><span>By A&T</span> • <span>Print</span></div>
+                        <h3>Digital Signages & Print</h3>
+                    </div>
+                </a>
+                <a href="service.html?service=manufacturing" class="svc-card-v2" data-reveal data-delay="80">
+                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80" alt="Manufacturing" loading="lazy"></div>
+                    <div class="svc-card-info">
+                        <div class="svc-card-meta"><span>By A&T</span> • <span>Workshop</span></div>
+                        <h3>Bespoke Manufacturing</h3>
+                    </div>
+                </a>
+                <a href="rentals.html" class="svc-card-v2" data-reveal data-delay="160">
+                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?w=1200&q=80" alt="Rentals" loading="lazy"></div>
+                    <div class="svc-card-info">
+                        <div class="svc-card-meta"><span>By A&T</span> • <span>Inventory</span></div>
+                        <h3>High-End Event Rentals</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FLOATING BAR ========== -->
+    <div class="floating-bar" id="floatingBar">
+        <div class="fb-inner glass-card">
+            <nav class="fb-nav">
+                <button id="fbToTop" class="fb-link"><i class="fa-solid fa-arrow-up" style="font-size: 0.7rem;"></i> Back to Top</button>
+                <div class="fb-divider"></div>
+                <a href="#services" class="fb-link">Services</a>
+                <div class="fb-divider"></div>
+                <!-- Clock moved here between Services and Call Us -->
+                <div class="fb-clock" id="fbClock">
+                    <span id="fbDateLabel">WED, APR 08</span> — <span id="fbTimeLabel">18:35</span>
+                </div>
+                <div class="fb-divider desktop-only"></div>
+                <a href="tel:+971581034611" class="fb-link fb-call">Call Us</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ========== GALLERY ========== -->
+    <section class="gallery-section" id="gallery">
+        <div class="wrap">
+            <div class="sec-head" data-reveal style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <div class="sec-label"><span></span> Portfolio</div>
+                    <h2 style="font-size: clamp(2rem, 4vw, 2.8rem);">Our Work Speaks<br>For Itself</h2>
+                </div>
+                <!-- Navigation Buttons -->
+                <div class="gallery-nav-btns" style="display: flex; gap: 10px;">
+                    <button id="galleryPrev" class="btn-pill" aria-label="Scroll left" style="width: 48px; height: 48px; padding: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button id="galleryNext" class="btn-pill" aria-label="Scroll right" style="width: 48px; height: 48px; padding: 0; display: flex; align-items: center; justify-content: center; background: var(--red); border: none; color: #fff;">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-runner" id="galleryRunner">
+            <div class="gallery-track" id="galleryTrack">
+                <div class="g-card" tabindex="0" data-project="Events">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" alt="Events project" loading="lazy">
+                    <div class="g-label"><span>Events</span><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </div>
+                <div class="g-card" tabindex="0" data-project="Fitout">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80" alt="Fitout project" loading="lazy">
+                    <div class="g-label"><span>Fitout</span><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </div>
+                <div class="g-card" tabindex="0" data-project="Exhibitions">
+                    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&q=80" alt="Exhibitions project" loading="lazy">
+                    <div class="g-label"><span>Exhibitions</span><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </div>
+                <div class="g-card" tabindex="0" data-project="Custom Mfg">
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4bf141d24c0?w=900&q=80" alt="Manufacturing project" loading="lazy">
+                    <div class="g-label"><span>Custom Mfg</span><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </div>
+                <div class="g-card" tabindex="0" data-project="Rentals">
+                    <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?w=900&q=80" alt="Rentals project" loading="lazy">
+                    <div class="g-label"><span>Rentals</span><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HIGHLIGHTS — 2 PICTURE + TEXT BLOCKS ========== -->
+    <section class="highlights" id="highlights">
+        <div class="wrap">
+
+            <div class="hl-block" data-reveal id="hlBlock0">
+                <div class="hl-media">
+                    <img id="hlImg0" src="https://images.unsplash.com/photo-1504917595217-d4bf141d24c0?w=1200&q=80" alt="Design-led production" loading="lazy">
+                    <div class="hl-media-badge glass-card">
+                        <i class="fa-solid fa-pen-ruler"></i>
+                        <span>Design-Led</span>
+                    </div>
+                </div>
+                <div class="hl-body">
+                    <div class="sec-label"><span></span> <span id="hlLabel0">Our Approach</span></div>
+                    <h2 id="hlTitle0">One Vision.<br>From Concept<br>to Completion.</h2>
+                    <p id="hlDesc0">We combine creative direction, structural engineering, and in-house manufacturing under a single roof. The original idea is never diluted — from visualization to final installation, every stage is controlled by us.</p>
+                    <ul class="hl-points" id="hlPoints0">
+                        <li><i class="fa-solid fa-check"></i> 2D &amp; 3D design &amp; visualization</li>
+                        <li><i class="fa-solid fa-check"></i> In-house carpentry, steel &amp; acrylic</li>
+                        <li><i class="fa-solid fa-check"></i> Large-format print center</li>
+                        <li><i class="fa-solid fa-check"></i> On-site logistics &amp; installation</li>
+                    </ul>
+                    <a href="#quote" class="btn-pill btn-red">Start a Project</a>
+                </div>
+            </div>
+
+            <div class="hl-block hl-block--flip" data-reveal data-delay="120" id="hlBlock1">
+                <div class="hl-media">
+                    <img id="hlImg1" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80" alt="Fully integrated operations" loading="lazy">
+                    <div class="hl-media-badge glass-card">
+                        <i class="fa-solid fa-gears"></i>
+                        <span>Integrated</span>
+                    </div>
+                </div>
+                <div class="hl-body">
+                    <div class="sec-label"><span></span> <span id="hlLabel1">Our Advantage</span></div>
+                    <h2 id="hlTitle1">One Partner.<br>Zero Fragmentation.<br>Pure Results.</h2>
+                    <p id="hlDesc1">Most clients juggle designers, fabricators, printers, and installers separately. A&amp;T brings every layer together, creating stronger alignment between idea and outcome — faster, cheaper, and more precise.</p>
+                    <ul class="hl-points" id="hlPoints1">
+                        <li><i class="fa-solid fa-check"></i> All services under one contract</li>
+                        <li><i class="fa-solid fa-check"></i> Faster turnaround &amp; clearer comms</li>
+                        <li><i class="fa-solid fa-check"></i> Dubai standards, global delivery</li>
+                        <li><i class="fa-solid fa-check"></i> Europe, USA &amp; GCC coverage</li>
+                    </ul>
+                    <a href="#services" class="btn-pill btn-outline">Explore Services</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========== YOUTUBE RECENTS ========== -->
+    <section class="youtube-section" id="youtube">
+        <div class="wrap" data-reveal>
+            <div class="sec-label"><span></span> Stream &amp; Learn</div>
+            <h2>Our YouTube Recents</h2>
+            <p class="sec-subtitle">Step behind the scenes and see exactly how we design, produce, and execute world-class environments across Dubai.</p>
+            
+            <div class="yt-video-container glass-card" style="margin-top: 3rem; padding: 1rem; border-radius: 20px;">
+                <iframe id="homeYoutube" style="width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: none; display: block;" 
+                    src="https://www.youtube.com/embed/dNDQ8dJGdXQ?rel=0" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://www.youtube.com/@aandttechnicalservices" target="_blank" rel="noopener noreferrer" class="btn-pill btn-red btn-lg">
+                    <i class="fa-brands fa-youtube"></i> Subscribe to our Channel
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TEAM SECTION ========== -->
+    <section class="team-section" id="team" style="padding: 10rem 0; background: var(--bg2);">
+        <div class="wrap" style="text-align: center;">
+            <div class="sec-head" data-reveal>
+                <div class="sec-label" style="justify-content: center;"><span></span> Our Team</div>
+                <h2 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 2rem;">The Force Behind<br>the Execution</h2>
+                <p class="sec-subtitle" style="font-size: 1.1rem; color: var(--muted); margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">Meet the specialized professionals who bring world-class projects to life.</p>
+            </div>
+
+            <div class="team-grid" id="teamHomeGrid"></div>
+            <script>
+                (async function() {
+                    const grid = document.getElementById('teamHomeGrid');
+                    if (!grid) return;
+                    try {
+                        const team = await fetchSanity('*[_type == "teamMember"][0...6]');
+                        
+                        team.forEach((m, i) => {
+                            const card = document.createElement('div');
+                            card.className = 'team-card';
+                            card.setAttribute('data-reveal', '');
+                            card.style.setProperty('--delay', (i % 4) * 100 + 'ms');
+                            card.innerHTML = `
+                                <div class="team-img-wrap">
+                                    <i class="fa-solid fa-quote-left team-quote-lg"></i>
+                                    <img src="${buildSanityImageUrl(m.image)}" alt="${m.name}" loading="lazy">
+                                </div>
+                                <div class="team-info">
+                                    <h3>${m.name}</h3>
+                                    <p class="position">${m.position}</p>
+                                    <div class="team-bio">
+                                        ${m.bio}<i class="fa-solid fa-quote-right team-quote-sm"></i>
+                                    </div>
+                                </div>
+                            `;
+                            grid.appendChild(card);
+                        });
+                        // Initialize reveal for dynamic elements
+                        if (window.observer) {
+                           document.querySelectorAll('#teamHomeGrid [data-reveal]').forEach(el => window.observer.observe(el));
+                        }
+                    } catch (e) { console.error('Team load error:', e); }
+                })();
+            </script>
+
+            <!-- Mobile Carousel Nav -->
+            <div class="team-nav-mobile">
+                <button class="team-nav-btn" onclick="document.getElementById('teamHomeGrid').scrollBy({left: -280, behavior: 'smooth'})">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="team-nav-btn" onclick="document.getElementById('teamHomeGrid').scrollBy({left: 280, behavior: 'smooth'})">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div style="margin-top: 5rem;">
+                <a href="about.html" class="btn-pill btn-outline">Meet the Entire Team</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== QUOTE FORM ========== -->
+    <section class="quote-section" id="quote">
+        <div class="wrap">
+            <div class="quote-split" data-reveal>
+                <!-- Left info -->
+                <div class="quote-left">
+                    <div class="sec-label"><span></span> Get in Touch</div>
+                    <h2>Let's Build<br>Your Vision.</h2>
+                    <p>Tell us about your project and we'll get back to you within 24 hours.</p>
+                    <div class="quote-stats" id="quoteStatsContainer">
+                        <div class="q-stat">
+                            <strong>500+</strong>
+                            <span>Satisfied Clients</span>
+                        </div>
+                        <div class="q-stat">
+                            <strong>12+</strong>
+                            <span>Years Experience</span>
+                        </div>
+                        <div class="q-stat">
+                            <strong>40+</strong>
+                            <span>Countries Served</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right form -->
+                <form class="quote-form glass-card" id="quoteForm" novalidate>
+                    <div class="form-field">
+                        <label for="name" id="lbl_contact_name">Your Name *</label>
+                        <input type="text" id="name" name="name" placeholder="John Smith" required autocomplete="name">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="company" id="lbl_contact_company">Company Name</label>
+                            <input type="text" id="company" name="company" placeholder="Acme Corp">
+                        </div>
+                        <div class="form-field">
+                            <label for="position">Position</label>
+                            <input type="text" id="position" name="position" placeholder="Marketing Director">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="email" id="lbl_contact_email">Email *</label>
+                            <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
+                        </div>
+                        <div class="form-field">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+971 50 000 0000">
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="description" id="lbl_contact_message">Message *</label>
+                        <textarea id="description" name="description" rows="5" placeholder="Tell us about your project and we'll get back to you within 24 hours." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-pill btn-red btn-lg" style="width: 100%;" id="submitBtn">
+                        <span id="txt_contact_submit">Send Request</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <script>
+                    (async function() {
+                        try {
+                            const settingsArray = await fetchSanity('*[_type == "siteSettings"]');
+                            const settings = settingsArray && settingsArray.length > 0 ? settingsArray[0] : {};
+                            const p = settings.placeholders || {};
+                            if (p.contact_name) {
+                                document.getElementById('lbl_contact_name').textContent = p.contact_name;
+                                document.getElementById('name').placeholder = p.contact_name;
+                            }
+                            if (p.contact_email) {
+                                document.getElementById('lbl_contact_email').textContent = p.contact_email;
+                                document.getElementById('email').placeholder = p.contact_email;
+                            }
+                            if (p.contact_company) {
+                                document.getElementById('lbl_contact_company').textContent = p.contact_company;
+                                document.getElementById('company').placeholder = p.contact_company;
+                            }
+                            if (p.contact_message) {
+                                document.getElementById('lbl_contact_message').textContent = p.contact_message;
+                                document.getElementById('description').placeholder = p.contact_message;
+                            }
+                            if (p.contact_submit) {
+                                document.getElementById('txt_contact_submit').textContent = p.contact_submit;
+                            }
+                        } catch(e) {}
+                    })();
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LIGHTBOX MODAL ========== -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project Gallery" hidden>
+        <div class="lb-backdrop" id="lbBackdrop"></div>
+        <button class="lb-close btn-pill" id="lbClose" aria-label="Close gallery">
+            <i class="fa-solid fa-xmark"></i> Close
+        </button>
+        <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Previous image">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="lb-arrow lb-next" id="lbNext" aria-label="Next image">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="lb-stage">
+            <div class="lb-img-wrap">
+                <img src="" alt="" id="lbImage" class="lb-image">
+                <div class="lb-loading" id="lbLoading" aria-hidden="true">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                </div>
+            </div>
+            <div class="lb-caption-pill" id="lbCaption">
+                <div class="lb-caption-left">
+                    <span class="lb-cat" id="lbCat">Category</span>
+                    <h3 id="lbTitleText">Project Title</h3>
+                </div>
+                <div class="lb-caption-meta" id="lbMeta">
+                    <span id="lbYear"><i class="fa-regular fa-calendar"></i> Year</span>
+                    <span id="lbLoc"><i class="fa-solid fa-location-dot"></i> Location</span>
+                </div>
+                <p id="lbDesc" class="lb-desc">Description here.</p>
+                <div class="lb-counter" id="lbCounter">1 / 10</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="wrap footer-wrap">
+            <div class="footer-brand">
+                <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
+                <p>A Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/at.technicalservices/" class="soc-btn soc-instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/atseventsae/" class="soc-btn soc-facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/aandttechnicalservices/" class="soc-btn soc-linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@aandttechnicalservices" class="soc-btn soc-youtube" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="#gallery">Projects</a>
+                <a href="#quote">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="terms.html">Terms of Service</a>
+                <a href="policy.html">Our Policies</a>
+                <a href="policy.html">Privacy Policy</a>
+                <a href="admin-v2.html">Admin Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Our Location</h4>
+                <p><a href="https://maps.app.goo.gl/SwW2omSGuhX5GkeP9" target="_blank" rel="noopener noreferrer" style="color: inherit;" class="cms-location-link"><i class="fa-solid fa-location-dot"></i> <span class="cms-location">Al Kawakeb warehouse no. 5, Alquoz Industrial area 2, Dubai, UAE</span></a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@at-s.ae" class="cms-email" style="color: inherit; text-decoration: none;">info@at-s.ae</a></p>
+                <p><i class="fa-solid fa-phone"></i> <span class="cms-phone">+971 58 103 4611</span></p>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <p>&copy; 2026 A&T Technical Services. All rights reserved.</p>
+            <p class="footer-motto">Dubai to the World <span class="red">•</span></p>
+        </div>
+    </footer>
+
+    <script src="sanityClient.js"></script>
+    <script src="index-portfolio.js"></script>
+    <script src="script.js"></script>
+    <script>
+        (async function() {
+            try {
+                // Fetch homepage document from Sanity
+                const dataArray = await fetchSanity('*[_type == "homepage"]');
+                const data = dataArray && dataArray.length > 0 ? dataArray[0] : null;
+                
+                // Hero Section
+                if (data.hero) {
+                    if (data.hero.title) document.getElementById('welcomeText').innerHTML = data.hero.title;
+                    if (data.hero.side_text) document.getElementById('homeSideText').innerText = data.hero.side_text;
+                    if (data.hero.badge_text) document.getElementById('homeBadgeText').innerText = data.hero.badge_text;
+                    if (data.hero.description) document.getElementById('homeDesc').innerText = data.hero.description;
+                    if (data.hero.clients_stat) document.getElementById('homeClientStat').innerText = data.hero.clients_stat;
+                    if (data.hero.clients_text) document.getElementById('homeClientText').innerText = data.hero.clients_text;
+                }
+                
+                // Highlights
+                if (data && data.highlights && data.highlights.length > 0) {
+                    for (let i = 0; i < 2; i++) {
+                        if (data.highlights[i]) {
+                            const hl = data.highlights[i];
+                            if (hl.image) document.getElementById('hlImg' + i).src = buildSanityImageUrl(hl.image);
+                            if (hl.label) document.getElementById('hlLabel' + i).innerText = hl.label;
+                            if (hl.title) document.getElementById('hlTitle' + i).innerHTML = hl.title;
+                            if (hl.description) document.getElementById('hlDesc' + i).innerText = hl.description;
+                            if (hl.points) {
+                                document.getElementById('hlPoints' + i).innerHTML = hl.points.map(p => `<li><i class="fa-solid fa-check"></i> ${p}</li>`).join('');
+                            }
+                        }
+                    }
+                }
+
+                // YouTube
+                if (data.youtube && data.youtube.url) {
+                    document.getElementById('homeYoutube').src = data.youtube.url;
+                }
+
+                // Quote form stats
+                if (data.quote_stats) {
+                    const statsContainer = document.getElementById('quoteStatsContainer');
+                    if (statsContainer) {
+                        statsContainer.innerHTML = data.quote_stats.map(st => `
+                            <div class="q-stat">
+                                <strong>${st.number}</strong>
+                                <span>${st.label}</span>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch(e) { }
+        })();
+    </script>
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

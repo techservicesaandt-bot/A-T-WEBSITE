@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A&T Technical Services — Project Showcase"/>
+    <title id="pageTitle">A&T — Service Projects</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="service.css">
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="dark-mode" id="body">
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ========== HEADER (shared) ========== -->
+    <header class="site-header solid" id="header">
+        <div class="header-wrap">
+            <a href="index.html" class="logo" aria-label="Back to Home">
+                <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
+                <div class="logo-text">
+                    <span class="logo-name">Technical Services</span>
+                    <span class="logo-tag">Dubai to the World</span>
+                </div>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main">
+                <a href="service.html?service=events" class="nav-item">Events</a>
+                <a href="service.html?service=exhibitions" class="nav-item">Exhibitions</a>
+                <a href="service.html?service=fitout" class="nav-item">Fitout</a>
+                <a href="service.html?service=signages" class="nav-item">Signages and Large Format Printing</a>
+                <a href="service.html?service=manufacturing" class="nav-item">Manufacture</a>
+                <div class="nav-dropdown">
+                    <button class="nav-item drop-trigger" aria-haspopup="true">
+                        Rentals <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <ul class="drop-menu" role="menu">
+                        <li><a href="rentals.html?cat=furniture" role="menuitem"><i class="fa-solid fa-couch"></i>Furniture</a></li>
+                        <li><a href="rentals.html?cat=devices" role="menuitem"><i class="fa-solid fa-laptop"></i>Devices</a></li>
+                        <li><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="header-right">
+
+                <button id="themeBtn" class="hdr-btn"><i class="fa-solid fa-sun" id="themeIco"></i></button>
+                <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link">
+                    <i class="fa-solid fa-phone"></i> Call Us
+                </a>
+                <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MOBILE DRAWER ========== -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+        <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+        <nav class="drawer-nav" aria-label="Mobile">
+            <a href="service.html?service=events" class="drawer-link">Events</a>
+            <a href="service.html?service=exhibitions" class="drawer-link">Exhibitions</a>
+            <a href="service.html?service=fitout" class="drawer-link">Fitout</a>
+            <a href="service.html?service=signages" class="drawer-link">Signages and Large Format Printing</a>
+            <a href="service.html?service=manufacturing" class="drawer-link">Manufacture</a>
+            <div class="drawer-acc">
+                <button class="drawer-link drawer-acc-trigger" id="drawerRentals" aria-expanded="false">
+                    Rentals <i class="fa-solid fa-angle-down drag-angle"></i>
+                </button>
+                <div class="drawer-acc-body" id="drawerRentalsBody">
+                    <a href="rentals.html?cat=furniture" class="drawer-sub"><i class="fa-solid fa-couch"></i> Furniture</a>
+                    <a href="rentals.html?cat=devices" class="drawer-sub"><i class="fa-solid fa-laptop"></i> Devices</a>
+                    <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
+                </div>
+            </div>
+        </nav>
+        <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link">
+            <i class="fa-solid fa-phone"></i> Call Us
+        </a>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <!-- ========== SERVICE HERO ========== -->
+    <section class="svc-hero" id="svcHero">
+        <div class="svc-hero-bg" id="svcHeroBg"></div>
+        <div class="svc-hero-veil"></div>
+        <div class="wrap svc-hero-inner">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </a>
+            <div class="svc-hero-content" data-reveal>
+                <div class="sec-label" id="svcTag"><span></span> <span id="svcTagText">Our Services</span></div>
+                <h1 id="svcTitle">Service Title</h1>
+                <p id="svcTagline" class="svc-tagline"></p>
+                <p id="svcDesc" class="svc-desc"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS GRID ========== -->
+    <section class="projects-section">
+        <div class="wrap">
+            <div class="projects-header" data-reveal>
+                <h2>Projects</h2>
+                <p id="projectCount" class="projects-count"></p>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Injected by service.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA STRIP ========== -->
+    <section class="svc-cta-strip">
+        <div class="wrap svc-cta-inner" data-reveal>
+            <div>
+                <h2>Ready to Start<br>Your Project?</h2>
+                <p>Tell us what you need and we'll make it happen — Dubai to the world.</p>
+            </div>
+            <a href="index.html#quote" class="btn-pill btn-red btn-lg">
+                Get a Quote <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== LIGHTBOX MODAL ========== -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project Gallery" hidden>
+        <!-- Backdrop -->
+        <div class="lb-backdrop" id="lbBackdrop"></div>
+
+        <!-- Close Button -->
+        <button class="lb-close btn-pill" id="lbClose" aria-label="Close gallery">
+            <i class="fa-solid fa-xmark"></i> Close
+        </button>
+
+        <!-- Navigation Arrows -->
+        <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Previous project">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="lb-arrow lb-next" id="lbNext" aria-label="Next project">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Image + Caption Container -->
+        <div class="lb-stage">
+            <div class="lb-img-wrap">
+                <img src="" alt="" id="lbImage" class="lb-image">
+                <div class="lb-loading" id="lbLoading" aria-hidden="true">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                </div>
+            </div>
+
+            <!-- Pill Caption Bar -->
+            <div class="lb-caption-pill" id="lbCaption">
+                <div class="lb-caption-left">
+                    <span class="lb-cat" id="lbCat">Category</span>
+                    <h3 id="lbTitleText">Project Title</h3>
+                </div>
+                <div class="lb-caption-meta" id="lbMeta">
+                    <span id="lbYear"><i class="fa-regular fa-calendar"></i> Year</span>
+                    <span id="lbLoc"><i class="fa-solid fa-location-dot"></i> Location</span>
+                </div>
+                <p id="lbDesc" class="lb-desc">Description here.</p>
+                <div class="lb-counter" id="lbCounter">1 / 5</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER (shared) ========== -->
+    <footer class="site-footer">
+        <div class="wrap footer-wrap">
+            <div class="footer-brand">
+                <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
+                <p>A Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/at.technicalservices/" class="soc-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/atseventsae/" class="soc-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/aandttechnicalservices/" class="soc-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@aandttechnicalservices" class="soc-btn" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#gallery">Projects</a>
+                <a href="index.html#quote">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="terms.html">Terms of Service</a>
+                <a href="policy.html">Our Policies</a>
+                <a href="policy.html">Privacy Policy</a>
+                <li><a href="admin-v2.html">Admin Login</a></li>
+            </div>
+            <div class="footer-col">
+                <h4>Our Location</h4>
+                <p><a href="https://maps.app.goo.gl/SwW2omSGuhX5GkeP9" target="_blank" rel="noopener noreferrer" style="color: inherit;" class="cms-location-link"><i class="fa-solid fa-location-dot"></i> <span class="cms-location">Al Kawakeb warehouse no. 5, Alquoz Industrial area 2, Dubai, UAE</span></a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@at-s.ae" class="cms-email" style="color: inherit; text-decoration: none;">info@at-s.ae</a></p>
+                <p><i class="fa-solid fa-phone"></i> <span class="cms-phone">+971 58 103 4611</span></p>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <p>&copy; 2026 A&T Technical Services. All rights reserved.</p>
+            <p class="footer-motto">Dubai to the World <span class="red">•</span></p>
+        </div>
+    </footer>
+
+    <script src="sanityClient.js"></script>
+    <script src="script.js"></script>
+    <script src="service.js"></script>
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
