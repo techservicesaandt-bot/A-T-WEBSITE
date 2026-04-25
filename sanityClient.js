@@ -1,4 +1,4 @@
-const SANITY_PROJECT_ID = '7amv4h2g';
+const SANITY_PROJECT_ID = 'g1byryuz';
 const SANITY_DATASET = 'production';
 const SANITY_API_VERSION = 'v2023-01-01';
 
