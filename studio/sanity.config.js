@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'A&T Technical Services CMS',
 
-  projectId: '7amv4h2g',
+  projectId: 'g1byryuz',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
