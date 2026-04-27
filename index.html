@@ -182,50 +182,7 @@
                 </div>
             </div>
             <div class="svc-grid-v2" id="svcGrid">
-                <!-- Row 1 -->
-                <a href="service.html?service=events" class="svc-card-v2" data-reveal>
-                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80" alt="Events" loading="lazy"></div>
-                    <div class="svc-card-info">
-                        <div class="svc-card-meta"><span>By A&T</span> • <span>Events</span></div>
-                        <h3>Large Scale Events</h3>
-                    </div>
-                </a>
-                <a href="service.html?service=exhibitions" class="svc-card-v2" data-reveal data-delay="80">
-                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200&q=80" alt="Exhibitions" loading="lazy"></div>
-                    <div class="svc-card-info">
-                        <div class="svc-card-meta"><span>By A&T</span> • <span>Portfolio</span></div>
-                        <h3>Award-Winning Exhibitions</h3>
-                    </div>
-                </a>
-                <a href="service.html?service=fitout" class="svc-card-v2" data-reveal data-delay="160">
-                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80" alt="Fitout" loading="lazy"></div>
-                    <div class="svc-card-info">
-                        <div class="svc-card-meta"><span>By A&T</span> • <span>Interior</span></div>
-                        <h3>Premium Fitout Solutions</h3>
-                    </div>
-                </a>
-                <!-- Row 2 -->
-                <a href="service.html?service=signages" class="svc-card-v2" data-reveal>
-                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=1200&q=80" alt="Signages" loading="lazy"></div>
-                    <div class="svc-card-info">
-                        <div class="svc-card-meta"><span>By A&T</span> • <span>Print</span></div>
-                        <h3>Digital Signages & Print</h3>
-                    </div>
-                </a>
-                <a href="service.html?service=manufacturing" class="svc-card-v2" data-reveal data-delay="80">
-                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80" alt="Manufacturing" loading="lazy"></div>
-                    <div class="svc-card-info">
-                        <div class="svc-card-meta"><span>By A&T</span> • <span>Workshop</span></div>
-                        <h3>Bespoke Manufacturing</h3>
-                    </div>
-                </a>
-                <a href="rentals.html" class="svc-card-v2" data-reveal data-delay="160">
-                    <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?w=1200&q=80" alt="Rentals" loading="lazy"></div>
-                    <div class="svc-card-info">
-                        <div class="svc-card-meta"><span>By A&T</span> • <span>Inventory</span></div>
-                        <h3>High-End Event Rentals</h3>
-                    </div>
-                </a>
+                <!-- Services will be loaded from Sanity -->
             </div>
         </div>
     </section>
@@ -603,6 +560,29 @@
                 const dataArray = await fetchSanity('*[_type == "homepage"]');
                 const data = dataArray && dataArray.length > 0 ? dataArray[0] : null;
                 
+                // Fetch Services
+                const servicesArray = await fetchSanity('*[_type == "service"] | order(order asc)');
+                const svcGrid = document.getElementById('svcGrid');
+                if (svcGrid && servicesArray && servicesArray.length > 0) {
+                    svcGrid.innerHTML = servicesArray.map((svc, i) => {
+                        const delay = (i % 3) * 80;
+                        const link = svc.id.current === 'rentals' ? 'rentals.html' : `service.html?service=${svc.id.current}`;
+                        return `
+                        <a href="${link}" class="svc-card-v2" data-reveal data-delay="${delay}">
+                            <div class="svc-card-img"><img src="${buildSanityImageUrl(svc.image)}" alt="${svc.title}" loading="lazy"></div>
+                            <div class="svc-card-info">
+                                <div class="svc-card-meta"><span>By A&T</span> • <span>${svc.homeMeta || 'Service'}</span></div>
+                                <h3>${svc.title}</h3>
+                            </div>
+                        </a>
+                        `;
+                    }).join('');
+                    if (window.observer) {
+                        document.querySelectorAll('#svcGrid [data-reveal]').forEach(el => window.observer.observe(el));
+                    }
+                }
+
+
                 // Hero Section
                 if (data.hero) {
                     if (data.hero.title) document.getElementById('welcomeText').innerHTML = data.hero.title;
