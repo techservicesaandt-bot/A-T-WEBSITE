@@ -5,19 +5,24 @@
 (async function () {
     'use strict';
 
-    // Static metadata for service categories
-    const AT_SERVICES = {
-       events: { title: 'Events', tagline: 'Large Scale Events', description: 'End-to-end event production and execution.' },
-       exhibitions: { title: 'Exhibitions', tagline: 'Award-Winning Exhibitions', description: 'Immersive and engaging exhibition stands.' },
-       fitout: { title: 'Fitout', tagline: 'Premium Fitout Solutions', description: 'World-class interior fit-out for commercial spaces.' },
-       signages: { title: 'Signages and Large Format Printing', tagline: 'Digital Signages & Print', description: 'High-quality signage printing and installation.' },
-       branding: { title: 'Branding', tagline: 'Brand Experiences', description: 'Brand realization and physical activations.' },
-       manufacturing: { title: 'Manufacture', tagline: 'Bespoke Manufacturing', description: 'In-house production facility for custom builds.' }
-    };
-
     const params  = new URLSearchParams(window.location.search);
     const svcKey  = (params.get('service') || 'events').toLowerCase();
-    const svcData = AT_SERVICES[svcKey];
+    
+    let svcData = null;
+    let heroImageUrl = '';
+
+    try {
+        const services = await fetchSanity(`*[_type == "service" && id.current == "${svcKey}"]`);
+        if (services && services.length > 0) {
+            svcData = services[0];
+            svcData.projects = [];
+            if (svcData.image) {
+                heroImageUrl = buildSanityImageUrl(svcData.image);
+            }
+        }
+    } catch(err) {
+        console.error("Failed to load service from Sanity", err);
+    }
 
     if (!svcData) { window.location.href = 'index.html'; return; }
 
@@ -37,29 +42,18 @@
         svcData.projects = [];
     }
 
-    // ---- Background images per service (used in hero) ----
-    const HERO_IMAGES = {
-        events:        'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1800&q=80',
-        exhibitions:   'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1800&q=80',
-        fitout:        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1800&q=80',
-        signages:      'https://images.unsplash.com/photo-1588693959604-3993d39ed708?w=1800&q=80',
-        branding:      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=80',
-        manufacturing: 'https://images.unsplash.com/photo-1504917595217-d4bf141d24c0?w=1800&q=80',
-        rentals:       'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=1800&q=80'
-    };
-
     // ---- Populate page meta ----
-    document.getElementById('pageTitle').textContent = `A&T — ${svcData.title}`;
-    document.getElementById('svcTagText').textContent = svcData.title;
-    document.getElementById('svcTitle').textContent   = svcData.title;
-    document.getElementById('svcTagline').textContent = svcData.tagline;
-    document.getElementById('svcDesc').textContent    = svcData.description;
+    document.getElementById('pageTitle').textContent = `A&T — ${svcData.title || ''}`;
+    document.getElementById('svcTagText').textContent = svcData.title || '';
+    document.getElementById('svcTitle').textContent   = svcData.title || '';
+    document.getElementById('svcTagline').textContent = svcData.tagline || '';
+    document.getElementById('svcDesc').textContent    = svcData.description || '';
     document.getElementById('projectCount').textContent = `${svcData.projects.length} Projects`;
 
     // ---- Hero Background ----
     const heroBg = document.getElementById('svcHeroBg');
-    if (heroBg && HERO_IMAGES[svcKey]) {
-        heroBg.style.backgroundImage = `url('${HERO_IMAGES[svcKey]}')`;
+    if (heroBg && heroImageUrl) {
+        heroBg.style.backgroundImage = `url('${heroImageUrl}')`;
     }
 
     // ============================================================
