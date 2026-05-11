@@ -5,5 +5,6 @@ export default defineCliConfig({
     projectId: 'g1byryuz',
     dataset: 'production'
   },
+
   studioHost: 'at-technical-services'
 })
