@@ -34,7 +34,15 @@ export default {
     },
     {
       name: 'image',
-      title: 'Service Main Image (Used in Home Page and Service Page Header)',
+      title: 'Service Main Image (Used in Home Page Parallax and Service Page Header)',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'cardImage',
+      title: 'Home Page Card Image (Used for the fanned out cards)',
       type: 'image',
       options: {
         hotspot: true,
