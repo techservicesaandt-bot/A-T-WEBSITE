@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="A&T Technical Services â€” Dubai's premier design, production and execution company.">
+    <meta name="description" content="A&T Technical Services — Dubai's premier design, production and execution company.">
     <title>A&T Technical Services | Dubai to the World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="homepage.css?v=2">
+    <link rel="stylesheet" href="homepage.css">
     <script src="sanityClient.js"></script>
 </head>
-<body class="dark-mode is-home" id="body">
+<body class="dark-mode" id="body">
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
 
@@ -42,14 +42,9 @@
                         <li role="none"><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
                     </ul>
                 </div>
-                <a href="360projects.html" class="nav-item nav-360-link">360 Projects</a>
             </nav>
             <div class="header-right">
-                <button id="themeBtn" class="theme-toggle" aria-label="Toggle theme">
-                    <i class="fa-solid fa-sun theme-toggle-icon"></i>
-                    <span class="theme-toggle-knob"></span>
-                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
-                </button>
+                <button id="themeBtn" class="hdr-btn" aria-label="Toggle theme"><i class="fa-solid fa-sun" id="themeIco"></i></button>
                 <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
                 <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
             </div>
@@ -74,62 +69,35 @@
                     <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
                 </div>
             </div>
-            <a href="360projects.html" class="drawer-link nav-360-link"><i class="fa-solid fa-cube"></i> 360 Projects</a>
         </nav>
         <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
     </aside>
     <div class="scrim" id="scrim"></div>
 
-    <!-- HERO PARALLAX (Logo → Slogan → Video) -->
-    <section class="px-hero" id="home">
-        <div class="px-hero-sticky">
-            <!-- Stage 1: Logo -->
-            <div class="px-hero-layer" id="pxLayer1">
-                <img src="logo.svg" alt="A&amp;T Logo" class="px-logo-large">
+    <!-- HERO -->
+    <section class="lv-hero" id="home">
+        <div class="hero-video-wrap">
+            <video id="heroVideo" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=2000">
+                <source src="hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="lv-hero-overlay"></div>
+        </div>
+        <div class="lv-hero-content">
+            <div class="lv-hero-years">
+                <span class="lv-year lv-year-start">2020</span>
+                <span class="lv-year lv-year-end">2026</span>
             </div>
-            <!-- Stage 2: Slogan -->
-            <div class="px-hero-layer" id="pxLayer3">
-                <p class="px-tagline-large">Design, Execution & Management all under one roof.</p>
-            </div>
-            <!-- Stage 3: Video -->
-            <div class="px-hero-layer px-hero-video-layer" id="pxVideoLayer">
-                <div class="px-video-wrap">
-                    <video id="heroVideo" muted loop playsinline poster="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&amp;fit=crop&amp;q=80&amp;w=2000">
-                        <source src="hero-video.mp4" type="video/mp4">
-                    </video>
-                    <div class="px-video-overlay"></div>
-                </div>
-                <div class="px-video-content">
-                    <p class="px-video-desc" id="homeDesc">Dubai's premier design, production and execution company &mdash; creating exhibitions, events, interiors, branding, and custom-built environments, all under one roof.</p>
-                    <div class="px-video-cta">
-                        <a href="#quote" class="lv-btn lv-btn-primary">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="https://drive.google.com/file/d/1hTLar8FqXUV2ehaJtoE_AMmPtYQP9jdC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="lv-btn lv-btn-outline"><i class="fa-solid fa-download"></i> Company Profile</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Scroll Hint (only on first stage) -->
-            <div class="px-scroll-hint" id="pxScrollHint">
-                <span>Scroll to explore</span>
-                <div class="px-scroll-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+            <h1 class="lv-hero-title">
+                <span class="lv-title-line">A&amp;T</span>
+                <span class="lv-title-sub">Technical Services</span>
+            </h1>
+            <p class="lv-hero-tagline" id="homeDesc">A&amp;T Technical Services is a design-led company creating exhibitions, events, interiors, branding, and custom-built environments — from concept to final installation, all under one roof.</p>
+            <div class="lv-hero-cta">
+                <a href="#quote" class="lv-btn lv-btn-primary">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://drive.google.com/file/d/1hTLar8FqXUV2ehaJtoE_AMmPtYQP9jdC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="lv-btn lv-btn-outline"><i class="fa-solid fa-download"></i> Company Profile</a>
             </div>
         </div>
-    </section>
-
-    <!-- 360 PROJECTS SECTION -->
-    <section class="lv-360" id="section-360">
-        <div class="lv-360-inner">
-            <div class="lv-360-badge"><i class="fa-solid fa-cube"></i> 360&deg; EXPERIENCE</div>
-            <h2 class="lv-360-title">Step Inside Our World</h2>
-            <p class="lv-360-text">At A&amp;T Technical Services, experience and innovation have always gone hand in hand. Three decades of delivering world-class events, exhibitions, fitouts, and signage across the UAE taught us one thing &mdash; the industry never stands still, and neither do we.</p>
-            <p class="lv-360-closing">30 years behind us. The future ahead.<br>Explore what we're building at A&amp;T.</p>
-            
-            <!-- Featured Live 360 Embed -->
-            <div class="lv-360-featured-container" id="featured360">
-                <!-- Random embed will be injected here by JS -->
-            </div>
-
-            <a href="360projects.html" class="lv-btn lv-btn-primary lv-360-cta">Explore All 360 Projects <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+        <div class="lv-scroll-indicator"><span>scroll</span><div class="lv-scroll-line"></div></div>
     </section>
 
     <!-- WHO WE ARE -->
@@ -158,105 +126,40 @@
         </div>
     </section>
 
-
-    <!-- SERVICES PARALLAX VIEWER -->
-    <section class="svc-parallax" id="services">
-        <div class="svc-parallax-sticky">
-            <!-- Stage 0: Title -->
-            <div class="svc-px-title" id="svcPxTitle">
-                <span class="lv-section-label">What we do</span>
-                <h2>Our Services</h2>
+    <!-- FEATURED PROJECTS -->
+    <section class="lv-projects" id="gallery">
+        <div class="lv-projects-inner">
+            <div class="lv-projects-header lv-reveal">
+                <div><span class="lv-section-label">Who we do it for</span></div>
+                <p class="lv-projects-title">From conceptualization to execution, our projects reflect a perfect blend of ambition and achievability</p>
             </div>
-
-            <!-- Stage 1: Events -->
-            <div class="svc-px-slide" data-svc="events" id="svcSlide0">
-                <div class="svc-px-text">
-                    <span class="svc-px-label">01</span>
-                    <h3>Events</h3>
-                    <p>From corporate conferences to massive festivals, we handle end-to-end execution of temporary environments that leave lasting impressions.</p>
-                    <a href="service.html?service=events" class="lv-link-arrow">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="svc-px-img">
-                    <img src="Events.png" alt="Events">
-                </div>
+            <div id="projectCards">
+                <a href="service.html?service=events" class="lv-project-card lv-reveal">
+                    <div class="lv-project-img"><span class="lv-project-tag">Events / 2024</span><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" alt="Events" loading="lazy"></div>
+                    <div class="lv-project-body"><h3>Large Scale Events</h3><p>Creating unforgettable experiences through world-class event design, production, and execution across the region.</p></div>
+                </a>
+                <a href="service.html?service=exhibitions" class="lv-project-card lv-reveal">
+                    <div class="lv-project-img"><span class="lv-project-tag">Exhibitions / 2024</span><img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&q=80" alt="Exhibitions" loading="lazy"></div>
+                    <div class="lv-project-body"><h3>Exhibition Stands</h3><p>Designing and building show-stopping exhibition stands that captivate audiences and elevate brand presence.</p></div>
+                </a>
+                <a href="service.html?service=fitout" class="lv-project-card lv-reveal">
+                    <div class="lv-project-img"><span class="lv-project-tag">Fitout / 2025</span><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80" alt="Fitout" loading="lazy"></div>
+                    <div class="lv-project-body"><h3>Interior Fitout</h3><p>Transforming spaces with precision craftsmanship, delivering premium commercial and retail environments.</p></div>
+                </a>
             </div>
+            <div class="lv-projects-footer lv-reveal"><a href="services.html" class="lv-btn lv-btn-outline" style="border-color:var(--border);color:var(--text);">Explore more <i class="fa-solid fa-arrow-right"></i></a></div>
+        </div>
+    </section>
 
-            <!-- Stage 2: Exhibitions -->
-            <div class="svc-px-slide" data-svc="exhibitions" id="svcSlide1">
-                <div class="svc-px-text">
-                    <span class="svc-px-label">02</span>
-                    <h3>Exhibitions</h3>
-                    <p>Custom exhibition stands that help brands stand out. We combine architectural design with strategic thinking to maximize engagement.</p>
-                    <a href="service.html?service=exhibitions" class="lv-link-arrow">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="svc-px-img">
-                    <img src="exhibitions.png" alt="Exhibitions">
-                </div>
+    <!-- SERVICES -->
+    <section class="lv-services" id="services">
+        <div class="lv-services-inner">
+            <div class="lv-services-header lv-reveal">
+                <div><span class="lv-section-label">What we do</span></div>
+                <h2 class="lv-services-subtitle">Expanding what's possible in creating transformative experiences</h2>
             </div>
-
-            <!-- Stage 3: Fitout -->
-            <div class="svc-px-slide" data-svc="fitout" id="svcSlide2">
-                <div class="svc-px-text">
-                    <span class="svc-px-label">03</span>
-                    <h3>Fitout</h3>
-                    <p>High-end interior fitout solutions for retail, office, and hospitality. From concept to civil works, furniture, and final finishing.</p>
-                    <a href="service.html?service=fitout" class="lv-link-arrow">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="svc-px-img">
-                    <img src="fitout.png" alt="Fitout">
-                </div>
-            </div>
-
-            <!-- Stage 4: Signages -->
-            <div class="svc-px-slide" data-svc="signages" id="svcSlide3">
-                <div class="svc-px-text">
-                    <span class="svc-px-label">04</span>
-                    <h3>Signages</h3>
-                    <p>In-house large format printing delivering vibrant, high-resolution graphics and custom signage — from wrapping to LED letterforms.</p>
-                    <a href="service.html?service=signages" class="lv-link-arrow">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="svc-px-img">
-                    <img src="signages.png" alt="Signages">
-                </div>
-            </div>
-
-            <!-- Stage 5: Manufacturing -->
-            <div class="svc-px-slide" data-svc="manufacturing" id="svcSlide4">
-                <div class="svc-px-text">
-                    <span class="svc-px-label">05</span>
-                    <h3>Manufacturing</h3>
-                    <p>Bespoke manufacturing in wood, metal, acrylic, and fiberglass. If it can be designed, we can build it — with full in-house quality control.</p>
-                    <a href="service.html?service=manufacturing" class="lv-link-arrow">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="svc-px-img">
-                    <img src="manufacturing.png" alt="Manufacturing">
-                </div>
-            </div>
-
-            <!-- Stage 6: Rentals -->
-            <div class="svc-px-slide" data-svc="rentals" id="svcSlide5">
-                <div class="svc-px-text">
-                    <span class="svc-px-label">06</span>
-                    <h3>Rentals</h3>
-                    <p>Premium furniture and device rental solutions for events, conferences, and corporate needs across the UAE.</p>
-                    <a href="rentals.html" class="lv-link-arrow">Browse Catalog <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="svc-px-img">
-                    <img src="rentals.png" alt="Rentals">
-                </div>
-            </div>
-
-            <div class="svc-px-cards" id="svcPxCards">
-                <h2 class="svc-px-cards-title">All Under One Roof</h2>
-                <div class="svc-fan-container">
-                    <a href="service.html?service=manufacturing" class="svc-fan-card card-1"><img src="Asset 25.png" alt="Manufacturing"><span class="fan-card-name">Manufacturing</span></a>
-                    <a href="service.html?service=fitout" class="svc-fan-card card-2"><img src="Asset 26.png" alt="Fitout"><span class="fan-card-name">Fitout</span></a>
-                    <a href="rentals.html" class="svc-fan-card card-3"><img src="Asset 27.png" alt="Rentals"><span class="fan-card-name">Rentals</span></a>
-                    <a href="service.html?service=signages" class="svc-fan-card card-4"><img src="Asset 28.png" alt="Signages"><span class="fan-card-name">Signages</span></a>
-                    <a href="service.html?service=exhibitions" class="svc-fan-card card-5"><img src="Asset 29.png" alt="Exhibitions"><span class="fan-card-name">Exhibitions</span></a>
-                    <a href="service.html?service=events" class="svc-fan-card card-6"><img src="Asset 30.png" alt="Events"><span class="fan-card-name">Events</span></a>
-                </div>
-            </div>
+            <div class="lv-svc-grid" id="svcGrid"></div>
+            <div class="lv-projects-footer lv-reveal" style="margin-top:3rem;"><a href="services.html" class="lv-link-arrow">Explore more <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
     </section>
 
@@ -381,7 +284,7 @@
         <div class="lv-footer-inner">
             <div class="lv-footer-brand">
                 <img src="logo.svg" alt="A&T Logo" style="height:64px;width:auto;object-fit:contain;filter:brightness(0) invert(1);">
-                <p>A Dubai-based design, production and execution company delivering world-class environments â€” from concept to completion.</p>
+                <p>A Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
                 <div class="lv-footer-socials">
                     <a href="https://www.instagram.com/at.technicalservices/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://www.facebook.com/atseventsae/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -392,7 +295,7 @@
             <div class="lv-footer-col">
                 <h4>Explore</h4>
                 <a href="about.html">About Us</a>
-                <a href="#services">Services</a>
+                <a href="services.html">Services</a>
                 <a href="#gallery">Projects</a>
                 <a href="#quote">Contact Us</a>
             </div>
@@ -461,6 +364,17 @@
         try{
             var dataArray=await fetchSanity('*[_type=="homepage"]');
             var data=dataArray&&dataArray.length>0?dataArray[0]:null;
+            // Services from Sanity
+            var servicesArray=await fetchSanity('*[_type=="service"]|order(order asc)');
+            var svcGrid=document.getElementById('svcGrid');
+            if(svcGrid&&servicesArray&&servicesArray.length>0){
+                svcGrid.innerHTML=servicesArray.map(function(svc){
+                    var link=svc.id.current==='rentals'?'rentals.html':'service.html?service='+svc.id.current;
+                    return '<a href="'+link+'" class="lv-svc-card lv-reveal"><img src="'+buildSanityImageUrl(svc.image)+'" alt="'+svc.title+'" loading="lazy"><div class="lv-svc-card-overlay"></div><div class="lv-svc-card-info"><div class="lv-svc-card-meta">By A&amp;T &bull; '+(svc.homeMeta||'Service')+'</div><h3>'+svc.title+'</h3></div></a>';
+                }).join('');
+                var obs2=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');obs2.unobserve(e.target);}});},{threshold:0.15});
+                document.querySelectorAll('#svcGrid .lv-reveal').forEach(function(el){obs2.observe(el);});
+            }
             if(data&&data.hero){
                 if(data.hero.description)document.getElementById('homeDesc').innerText=data.hero.description;
             }
@@ -470,10 +384,4 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
 

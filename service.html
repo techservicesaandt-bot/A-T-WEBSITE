@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="A&T Technical Services — Project Showcase"/>
-    <title id="pageTitle">A&T — Service Projects</title>
+    <meta name="description" content="A&T Technical Services â€” Project Showcase"/>
+    <title id="pageTitle">A&T â€” Service Projects</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,12 +28,12 @@
             <a href="index.html" class="logo" aria-label="Back to Home">
                 <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
                 <div class="logo-text">
-                    <span class="logo-name">Technical Services</span>
-                    <span class="logo-tag">Dubai to the World</span>
+                    <span class="logo-name"></span>
                 </div>
             </a>
 
             <nav class="desktop-nav" aria-label="Main">
+                <a href="index.html#home" class="nav-item">Home</a>
                 <a href="service.html?service=events" class="nav-item">Events</a>
                 <a href="service.html?service=exhibitions" class="nav-item">Exhibitions</a>
                 <a href="service.html?service=fitout" class="nav-item">Fitout</a>
@@ -49,11 +49,16 @@
                         <li><a href="rentals.html" role="menuitem"><i class="fa-solid fa-layer-group"></i>All Rentals</a></li>
                     </ul>
                 </div>
+                <a href="360projects.html" class="nav-item">360 Projects</a>
             </nav>
 
             <div class="header-right">
 
-                <button id="themeBtn" class="hdr-btn"><i class="fa-solid fa-sun" id="themeIco"></i></button>
+                <button id="themeBtn" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun theme-toggle-icon"></i>
+                    <span class="theme-toggle-knob"></span>
+                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                </button>
                 <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link">
                     <i class="fa-solid fa-phone"></i> Call Us
                 </a>
@@ -66,6 +71,7 @@
     <aside class="drawer" id="drawer" aria-hidden="true">
         <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
         <nav class="drawer-nav" aria-label="Mobile">
+            <a href="index.html#home" class="drawer-link">Home</a>
             <a href="service.html?service=events" class="drawer-link">Events</a>
             <a href="service.html?service=exhibitions" class="drawer-link">Exhibitions</a>
             <a href="service.html?service=fitout" class="drawer-link">Fitout</a>
@@ -81,6 +87,7 @@
                     <a href="rentals.html" class="drawer-sub"><i class="fa-solid fa-layer-group"></i> All Rentals</a>
                 </div>
             </div>
+            <a href="360projects.html" class="drawer-link"><i class="fa-solid fa-cube"></i> 360 Projects</a>
         </nav>
         <a href="tel:+971581034611" class="btn-pill btn-red drawer-cta cms-phone-link">
             <i class="fa-solid fa-phone"></i> Call Us
@@ -123,7 +130,7 @@
         <div class="wrap svc-cta-inner" data-reveal>
             <div>
                 <h2>Ready to Start<br>Your Project?</h2>
-                <p>Tell us what you need and we'll make it happen — Dubai to the world.</p>
+                <p>Tell us what you need and we'll make it happen â€” Dubai to the world.</p>
             </div>
             <a href="index.html#quote" class="btn-pill btn-red btn-lg">
                 Get a Quote <i class="fa-solid fa-arrow-right"></i>
@@ -131,45 +138,47 @@
         </div>
     </section>
 
-    <!-- ========== LIGHTBOX MODAL ========== -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project Gallery" hidden>
-        <!-- Backdrop -->
-        <div class="lb-backdrop" id="lbBackdrop"></div>
+    <!-- ========== 3D FLIP-BOOK MODAL ========== -->
+    <div class="fb-modal" id="fbModal" role="dialog" aria-modal="true" aria-label="Project Gallery" hidden>
+        <div class="fb-backdrop" id="fbBackdrop"></div>
 
-        <!-- Close Button -->
-        <button class="lb-close btn-pill" id="lbClose" aria-label="Close gallery">
-            <i class="fa-solid fa-xmark"></i> Close
+        <!-- Top Right Close -->
+        <button class="fb-close" id="fbClose" aria-label="Close gallery">
+            <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <!-- Navigation Arrows -->
-        <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Previous project">
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button class="lb-arrow lb-next" id="lbNext" aria-label="Next project">
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
+        <!-- 3D Book Stage -->
+        <div class="fb-stage" id="fbStage">
+            <!-- Book Container -->
+            <div class="fb-book" id="fbBook">
+                <!-- Pages injected by JS -->
+            </div>
+            
+            <!-- Edge Navigation Hit Areas -->
+            <button class="fb-nav fb-prev" id="fbPrev" aria-label="Previous Page"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="fb-nav fb-next" id="fbNext" aria-label="Next Page"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
 
-        <!-- Image + Caption Container -->
-        <div class="lb-stage">
-            <div class="lb-img-wrap">
-                <img src="" alt="" id="lbImage" class="lb-image">
-                <div class="lb-loading" id="lbLoading" aria-hidden="true">
-                    <i class="fa-solid fa-spinner fa-spin"></i>
+        <!-- Bottom UI Bar -->
+        <div class="fb-ui-bottom">
+            <!-- Left: Project Info -->
+            <div class="fb-info">
+                <span class="fb-cat" id="fbCat">Category</span>
+                <h3 id="fbTitle">Project Title</h3>
+                <div class="fb-meta">
+                    <span id="fbYear"><i class="fa-regular fa-calendar"></i> Year</span>
+                    <span id="fbLoc"><i class="fa-solid fa-location-dot"></i> Location</span>
                 </div>
+                <div class="fb-counter" id="fbCounter">1 / 5</div>
             </div>
 
-            <!-- Pill Caption Bar -->
-            <div class="lb-caption-pill" id="lbCaption">
-                <div class="lb-caption-left">
-                    <span class="lb-cat" id="lbCat">Category</span>
-                    <h3 id="lbTitleText">Project Title</h3>
+            <!-- Right: Cross-Project Navigation & CTA -->
+            <div class="fb-actions">
+                <div class="fb-proj-nav">
+                    <button id="fbProjPrev" aria-label="Previous Project"><i class="fa-solid fa-arrow-left"></i> Prev Project</button>
+                    <button id="fbProjNext" aria-label="Next Project">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
-                <div class="lb-caption-meta" id="lbMeta">
-                    <span id="lbYear"><i class="fa-regular fa-calendar"></i> Year</span>
-                    <span id="lbLoc"><i class="fa-solid fa-location-dot"></i> Location</span>
-                </div>
-                <p id="lbDesc" class="lb-desc">Description here.</p>
-                <div class="lb-counter" id="lbCounter">1 / 5</div>
+                <a href="index.html#quote" class="fb-cta">Get a Quote</a>
             </div>
         </div>
     </div>
@@ -179,7 +188,7 @@
         <div class="wrap footer-wrap">
             <div class="footer-brand">
                 <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
-                <p>A Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
+                <p>A Dubai-based design, production and execution company delivering world-class environments â€” from concept to completion.</p>
                 <div class="footer-socials">
                     <a href="https://www.instagram.com/at.technicalservices/" class="soc-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://www.facebook.com/atseventsae/" class="soc-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
@@ -210,7 +219,7 @@
         </div>
         <div class="footer-bar">
             <p>&copy; 2026 A&T Technical Services. All rights reserved.</p>
-            <p class="footer-motto">Dubai to the World <span class="red">•</span></p>
+            <p class="footer-motto">Dubai to the World <span class="red">â€¢</span></p>
         </div>
     </footer>
 
@@ -229,3 +238,4 @@
     </script>
 </body>
 </html>
+

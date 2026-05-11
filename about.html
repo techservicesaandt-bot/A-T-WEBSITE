@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="A&T Technical Services — About Us. Learn about our mission, vision, and the expert team behind our world-class execution."/>
+    <meta name="description" content="A&T Technical Services â€” About Us. Learn about our mission, vision, and the expert team behind our world-class execution."/>
     <title>About Us | A&T Technical Services</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,8 +43,8 @@
             padding: 0 5%;
         }
         .about-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 900;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
             margin-bottom: 1rem;
         }
 
@@ -82,8 +82,7 @@
             <a href="index.html" class="logo" aria-label="Home">
                 <img src="logo.svg" alt="A&T Logo" class="brand-logo" style="height: 56px; width: auto; object-fit: contain;">
                 <div class="logo-text">
-                    <span class="logo-name">Technical Services</span>
-                    <span class="logo-tag">Dubai to the World</span>
+                    <span class="logo-name"></span>
                 </div>
             </a>
             <nav class="desktop-nav" aria-label="Main">
@@ -104,7 +103,11 @@
                 </div>
             </nav>
             <div class="header-right">
-                <button id="themeBtn" class="hdr-btn"><i class="fa-solid fa-sun" id="themeIco"></i></button>
+                <button id="themeBtn" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun theme-toggle-icon"></i>
+                    <span class="theme-toggle-knob"></span>
+                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                </button>
                 <a href="tel:+971581034611" class="btn-pill btn-red desktop-only cms-phone-link"><i class="fa-solid fa-phone"></i> Call Us</a>
                 <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
             </div>
@@ -224,7 +227,7 @@
         <div class="wrap footer-wrap">
             <div class="footer-brand">
                 <img src="logo.svg" alt="A&T Logo" class="footer-brand-logo" style="height: 64px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
-                <p>Dubai-based design, production and execution company delivering world-class environments — from concept to completion.</p>
+                <p>Dubai-based design, production and execution company delivering world-class environments â€” from concept to completion.</p>
                 <div class="footer-socials">
                     <a href="https://www.instagram.com/at.technicalservices/" class="soc-btn soc-instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://www.facebook.com/atseventsae/" class="soc-btn soc-facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
@@ -255,7 +258,7 @@
         </div>
         <div class="footer-bar">
             <p>&copy; 2026 A&T Technical Services. All rights reserved.</p>
-            <p class="footer-motto">Dubai to the World <span class="red">•</span></p>
+            <p class="footer-motto">Dubai to the World <span class="red">â€¢</span></p>
         </div>
     </footer>
 
@@ -263,3 +266,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+

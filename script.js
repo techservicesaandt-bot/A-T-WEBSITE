@@ -56,7 +56,6 @@
     const body        = document.getElementById('body');
     const header      = document.getElementById('header');
     const themeBtn    = document.getElementById('themeBtn');
-    const themeIco    = document.getElementById('themeIco');
 
     const burger      = document.getElementById('burger');
     const drawer      = document.getElementById('drawer');
@@ -96,10 +95,17 @@
             el.addEventListener('mouseenter', () => body.classList.add('cursor-hovered'));
             el.addEventListener('mouseleave', () => body.classList.remove('cursor-hovered'));
         });
+
+        // Hover effect on red backgrounds to change cursor color
+        const redBgEls = document.querySelectorAll('.lv-about, .lv-testimonials, .btn-red, .drawer-cta');
+        redBgEls.forEach(el => {
+            el.addEventListener('mouseenter', () => body.classList.add('cursor-on-red'));
+            el.addEventListener('mouseleave', () => body.classList.remove('cursor-on-red'));
+        });
     }
 
     // ============================================================
-    // 2. THEME SWITCH
+    // 2. THEME SWITCH (Toggle)
     // ============================================================
     const savedTheme = localStorage.getItem('at-theme') || 'dark';
     applyTheme(savedTheme);
@@ -110,11 +116,11 @@
 
     function applyTheme(mode) {
         if (mode === 'dark') {
-            body.classList.replace('light-mode', 'dark-mode');
-            themeIco.className = 'fa-solid fa-sun';
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
         } else {
-            body.classList.replace('dark-mode', 'light-mode');
-            themeIco.className = 'fa-solid fa-moon';
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
         }
         localStorage.setItem('at-theme', mode);
     }
@@ -123,19 +129,225 @@
     // ============================================================
     // 4. HEADER — Solid on scroll
     // ============================================================
-    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname === '';
     
+    // Hero Parallax Elements
+    const heroSection = document.getElementById('home');
+    const pxLayer1 = document.getElementById('pxLayer1');
+    const pxLayer3 = document.getElementById('pxLayer3');
+    const pxVideoLayer = document.getElementById('pxVideoLayer');
+    const pxScrollHint = document.getElementById('pxScrollHint');
+    const heroVideo = document.getElementById('heroVideo');
+    const pxVideoContent = pxVideoLayer ? pxVideoLayer.querySelector('.px-video-content') : null;
+    let videoStarted = false;
+
     function handleScroll() {
         const scrolled = window.scrollY > 70;
         header.classList.toggle('solid', scrolled);
         
-        // On homepage, if not scrolled, we want to ensure visibility against dark video
         if (isHomePage) {
             body.classList.toggle('header-at-top', !scrolled);
+
+            // Hero Parallax Timeline Logic (3 stages: Logo → Slogan → Video)
+            if (heroSection && pxLayer1 && pxLayer3 && pxVideoLayer) {
+                const scrollY = window.scrollY;
+                const heroScrollable = heroSection.offsetHeight - window.innerHeight;
+                
+                if (heroScrollable > 0) {
+                    const progress = Math.min(Math.max(scrollY / heroScrollable, 0), 1);
+                    
+                    // 3 stages = ~0.33 each
+                    const STAGE = 1 / 3;
+                    const FADE_ZONE = STAGE * 0.4; // fade transition zone
+
+                    // --- Scroll Hint: fade out quickly ---
+                    if (pxScrollHint) {
+                        const hintFade = Math.min(scrollY / 100, 1);
+                        pxScrollHint.style.opacity = 1 - hintFade;
+                        pxScrollHint.style.pointerEvents = scrollY > 50 ? 'none' : 'auto';
+                    }
+
+                    // --- Stage 1: Logo ---
+                    const logoEnd = STAGE;
+                    if (progress < logoEnd - FADE_ZONE) {
+                        // Fully visible
+                        pxLayer1.style.opacity = 1;
+                        pxLayer1.style.transform = 'translateY(0) scale(1)';
+                    } else if (progress < logoEnd) {
+                        // Fading out
+                        const fadeOut = 1 - ((progress - (logoEnd - FADE_ZONE)) / FADE_ZONE);
+                        pxLayer1.style.opacity = fadeOut;
+                        pxLayer1.style.transform = `translateY(${-30 * (1 - fadeOut)}px) scale(${1 - 0.1 * (1 - fadeOut)})`;
+                    } else {
+                        pxLayer1.style.opacity = 0;
+                        pxLayer1.style.pointerEvents = 'none';
+                    }
+
+                    // --- Stage 2: Slogan ---
+                    const sloganStart = STAGE;
+                    const sloganEnd = STAGE * 2;
+                    if (progress < sloganStart - FADE_ZONE) {
+                        pxLayer3.style.opacity = 0;
+                        pxLayer3.style.transform = 'translateY(40px)';
+                    } else if (progress < sloganStart) {
+                        // Fading in
+                        const fadeIn = (progress - (sloganStart - FADE_ZONE)) / FADE_ZONE;
+                        pxLayer3.style.opacity = fadeIn;
+                        pxLayer3.style.transform = `translateY(${40 * (1 - fadeIn)}px)`;
+                    } else if (progress < sloganEnd - FADE_ZONE) {
+                        // Fully visible
+                        pxLayer3.style.opacity = 1;
+                        pxLayer3.style.transform = 'translateY(0)';
+                    } else if (progress < sloganEnd) {
+                        // Fading out
+                        const fadeOut = 1 - ((progress - (sloganEnd - FADE_ZONE)) / FADE_ZONE);
+                        pxLayer3.style.opacity = fadeOut;
+                        pxLayer3.style.transform = `translateY(${-20 * (1 - fadeOut)}px)`;
+                    } else {
+                        pxLayer3.style.opacity = 0;
+                        pxLayer3.style.pointerEvents = 'none';
+                    }
+
+                    // --- Stage 3: Video ---
+                    const videoStart = STAGE * 2;
+                    if (progress < videoStart - FADE_ZONE) {
+                        pxVideoLayer.style.opacity = 0;
+                        pxVideoLayer.style.pointerEvents = 'none';
+                        pxVideoLayer.classList.remove('is-visible');
+                        if (pxVideoContent) {
+                            pxVideoContent.style.opacity = 0;
+                            pxVideoContent.style.transform = 'translateY(30px)';
+                        }
+                    } else if (progress < videoStart) {
+                        // Fading in
+                        const fadeIn = (progress - (videoStart - FADE_ZONE)) / FADE_ZONE;
+                        pxVideoLayer.style.opacity = fadeIn;
+                        pxVideoLayer.style.pointerEvents = fadeIn > 0.5 ? 'auto' : 'none';
+                        pxVideoLayer.classList.add('is-visible');
+                        // Start video when it begins to appear
+                        if (!videoStarted && heroVideo) {
+                            heroVideo.play().catch(function(){});
+                            videoStarted = true;
+                        }
+                        if (pxVideoContent) {
+                            pxVideoContent.style.opacity = 0;
+                            pxVideoContent.style.transform = 'translateY(30px)';
+                        }
+                    } else {
+                        // Fully visible — hold
+                        pxVideoLayer.style.opacity = 1;
+                        pxVideoLayer.style.pointerEvents = 'auto';
+                        pxVideoLayer.classList.add('is-visible');
+                        if (!videoStarted && heroVideo) {
+                            heroVideo.play().catch(function(){});
+                            videoStarted = true;
+                        }
+                        // Fade in the text content after video is fully visible
+                        const textProgress = Math.min((progress - videoStart) / (STAGE * 0.5), 1);
+                        if (pxVideoContent) {
+                            pxVideoContent.style.opacity = textProgress;
+                            pxVideoContent.style.transform = `translateY(${30 * (1 - textProgress)}px)`;
+                        }
+                    }
+                }
+            }
         } else {
             body.classList.remove('header-at-top');
         }
+
+        // ============================================================
+        // SERVICES PARALLAX LOGIC
+        // ============================================================
+        if (svcParallax) {
+            const rect = svcParallax.getBoundingClientRect();
+            const svcScrollable = svcParallax.offsetHeight - window.innerHeight;
+            
+            if (svcScrollable > 0) {
+                // Only animate when section is in view
+                const svcTop = -rect.top;
+                const svcProgress = Math.min(Math.max(svcTop / svcScrollable, 0), 1);
+
+                const TOTAL_STAGES = 8; // title + 6 services + cards
+                const STAGE_SIZE = 1 / TOTAL_STAGES;
+                const FADE_ZONE = STAGE_SIZE * 0.25; // 25% of each stage for crossfade
+
+                // Stage 0: Title
+                const titleEnd = STAGE_SIZE;
+                if (svcProgress < titleEnd - FADE_ZONE) {
+                    svcPxTitle.style.opacity = 1;
+                    svcPxTitle.style.pointerEvents = 'auto';
+                } else if (svcProgress < titleEnd) {
+                    svcPxTitle.style.opacity = 1 - ((svcProgress - (titleEnd - FADE_ZONE)) / FADE_ZONE);
+                    svcPxTitle.style.pointerEvents = 'none';
+                } else {
+                    svcPxTitle.style.opacity = 0;
+                    svcPxTitle.style.pointerEvents = 'none';
+                }
+
+                // Stages 1-6: Service Slides
+                for (var si = 0; si < svcSlides.length; si++) {
+                    var slideStart = STAGE_SIZE * (si + 1);
+                    var slideEnd = slideStart + STAGE_SIZE;
+                    var slide = svcSlides[si];
+                    var textEl = slide.querySelector('.svc-px-text');
+                    var imgEl = slide.querySelector('.svc-px-img');
+
+                    if (svcProgress < slideStart - FADE_ZONE) {
+                        // Before this slide
+                        slide.style.opacity = 0;
+                        slide.style.pointerEvents = 'none';
+                        if (textEl) { textEl.style.opacity = 0; textEl.style.transform = 'translateY(30px)'; }
+                        if (imgEl) { imgEl.style.transform = 'translateX(100px)'; imgEl.style.opacity = 0; }
+                    } else if (svcProgress < slideStart) {
+                        // Fading in
+                        var fadeIn = (svcProgress - (slideStart - FADE_ZONE)) / FADE_ZONE;
+                        slide.style.opacity = fadeIn;
+                        if (textEl) { textEl.style.opacity = fadeIn; textEl.style.transform = 'translateY(' + (30 * (1 - fadeIn)) + 'px)'; }
+                        if (imgEl) { imgEl.style.transform = 'translateX(' + (100 * (1 - fadeIn)) + 'px)'; imgEl.style.opacity = fadeIn; }
+                    } else if (svcProgress < slideEnd - FADE_ZONE) {
+                        // Fully visible
+                        slide.style.opacity = 1;
+                        slide.style.pointerEvents = 'auto';
+                        if (textEl) { textEl.style.opacity = 1; textEl.style.transform = 'translateY(0)'; }
+                        if (imgEl) { imgEl.style.transform = 'translateX(0)'; imgEl.style.opacity = 1; }
+                    } else if (svcProgress < slideEnd) {
+                        // Fading out
+                        var fadeOut = 1 - ((svcProgress - (slideEnd - FADE_ZONE)) / FADE_ZONE);
+                        slide.style.opacity = fadeOut;
+                        if (textEl) { textEl.style.opacity = fadeOut; textEl.style.transform = 'translateY(' + (-20 * (1 - fadeOut)) + 'px)'; }
+                        if (imgEl) { imgEl.style.transform = 'translateX(' + (-50 * (1 - fadeOut)) + 'px)'; imgEl.style.opacity = fadeOut; }
+                    } else {
+                        // After this slide
+                        slide.style.opacity = 0;
+                        slide.style.pointerEvents = 'none';
+                    }
+                }
+
+                // Stage 7: Cards
+                var cardsStart = STAGE_SIZE * 7;
+                if (svcProgress < cardsStart - FADE_ZONE) {
+                    svcPxCards.style.opacity = 0;
+                    svcPxCards.style.pointerEvents = 'none';
+                } else if (svcProgress < cardsStart) {
+                    svcPxCards.style.opacity = (svcProgress - (cardsStart - FADE_ZONE)) / FADE_ZONE;
+                    svcPxCards.style.pointerEvents = 'none';
+                } else {
+                    svcPxCards.style.opacity = 1;
+                    svcPxCards.style.pointerEvents = 'auto';
+                }
+            }
+        }
     }
+
+    // Services Parallax Elements
+    const svcParallax = document.querySelector('.svc-parallax');
+    const svcPxTitle = document.getElementById('svcPxTitle');
+    const svcSlides = [];
+    for (var i = 0; i < 6; i++) {
+        var s = document.getElementById('svcSlide' + i);
+        if (s) svcSlides.push(s);
+    }
+    const svcPxCards = document.getElementById('svcPxCards');
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Init on load
@@ -568,11 +780,31 @@
         }
     }
 
+    // ============================================================
+    // 15. FEATURED 360 PROJECT (HOMEPAGE)
+    // ============================================================
+    function initFeatured360() {
+        const container = document.getElementById('featured360');
+        if (!container) return;
+
+        // Array of 360 project embeds (using iframes instead of scripts for reliable dynamic loading)
+        const projects360 = [
+            `<iframe class="ku-embed" frameborder="0" allowfullscreen="true" allow="xr-spatial-tracking; gyroscope; accelerometer" scrolling="no" src="https://kuula.co/share/h5JtP?logo=1&info=1&fs=1&vr=0&zoom=1&autorotate=0.26&thumbs=1&margin=24" style="width: 100%; height: 100%; border: none;"></iframe>`
+        ];
+
+        // Select a random project
+        const randomProject = projects360[Math.floor(Math.random() * projects360.length)];
+
+        // Inject the embed directly
+        container.innerHTML = randomProject;
+    }
+
     initWelcomeAnimation();
     initServicesScroll();
     initFloatingBar();
     initGlobalSettings();
     initHomepageCMS();
     initAboutCMS();
+    initFeatured360();
 
 })();

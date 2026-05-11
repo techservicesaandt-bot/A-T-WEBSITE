@@ -1,0 +1,137 @@
+/* ============================================================
+   360 PROJECTS PAGE — Immersive Virtual Tours
+   ============================================================ */
+
+/* ---- Page Hero ---- */
+.p360-hero {
+    position: relative;
+    width: 100%;
+    padding: 10rem 0 5rem;
+    overflow: hidden;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+}
+.p360-hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a0a0a 0%, #0c0c0c 50%, #0a0a1a 100%);
+    z-index: 0;
+}
+body.light-mode .p360-hero-bg {
+    background: linear-gradient(135deg, #f8f0f0 0%, #ffffff 50%, #f0f0f8 100%);
+}
+.p360-hero-veil {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(230,51,41,0.08) 0%, transparent 60%);
+    z-index: 1;
+}
+.p360-hero-inner {
+    position: relative;
+    z-index: 2;
+}
+.p360-hero-content {
+    max-width: 700px;
+}
+.p360-hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+.p360-hero-content p {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 550px;
+}
+.p360-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(230,51,41,0.25);
+    border-radius: 100px;
+    background: rgba(230,51,41,0.06);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+}
+.back-link:hover { color: var(--red); }
+
+/* ---- Main: Kuula Embed ---- */
+.p360-main {
+    position: relative;
+    z-index: 10;
+    padding: 3rem 0 4rem;
+    background: var(--bg);
+}
+.p360-embed-container {
+    width: 100%;
+    min-height: 75vh;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    background: #000;
+}
+/* Override Kuula embed to fill container */
+.p360-embed-container .ku-embed {
+    width: 100% !important;
+    height: 75vh !important;
+    min-height: 500px;
+}
+.p360-embed-container iframe {
+    width: 100% !important;
+    height: 75vh !important;
+    min-height: 500px;
+    border: none;
+    border-radius: 16px;
+}
+
+/* ---- CTA Section ---- */
+.p360-cta-section {
+    position: relative;
+    z-index: 10;
+    padding: 5rem 0;
+    background: var(--bg2);
+    text-align: center;
+}
+.p360-cta-inner h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+}
+.p360-cta-inner p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .p360-hero { padding: 8rem 0 3rem; min-height: 30vh; }
+    .p360-embed-container { min-height: 50vh; border-radius: 12px; }
+    .p360-embed-container .ku-embed,
+    .p360-embed-container iframe {
+        height: 50vh !important;
+        min-height: 350px;
+    }
+}

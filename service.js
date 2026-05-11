@@ -24,7 +24,17 @@
         console.error("Failed to load service from Sanity", err);
     }
 
-    if (!svcData) { window.location.href = 'index.html'; return; }
+    // FALLBACK DATA FOR OFFLINE DESIGN
+    if (!svcData) {
+        console.warn("No Sanity data found. Using local fallback data for design purposes.");
+        svcData = {
+            title: svcKey.charAt(0).toUpperCase() + svcKey.slice(1),
+            tagline: "Design, Produce, Execute.",
+            description: "A showcase of our premium projects in this category.",
+            projects: []
+        };
+        heroImageUrl = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80";
+    }
 
     try {
         const sanityProjects = await fetchSanity(`*[_type == "project" && serviceCategory == "${svcKey}"]`);
@@ -40,6 +50,37 @@
     } catch (err) {
         console.error("Failed to load project data from Sanity", err);
         svcData.projects = [];
+    }
+
+    if (svcData.projects.length === 0) {
+        // Provide dummy projects for testing
+        svcData.projects = [
+            {
+                title: "Dummy Project Alpha",
+                category: svcKey,
+                year: "2025",
+                location: "Dubai World Trade Centre",
+                description: "An incredible setup showcasing our premium design and execution.",
+                thumbnail: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+                gallery: [
+                    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80",
+                    "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1600&q=80",
+                    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80"
+                ]
+            },
+            {
+                title: "Dummy Project Beta",
+                category: svcKey,
+                year: "2024",
+                location: "Abu Dhabi",
+                description: "Massive outdoor installation.",
+                thumbnail: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=80",
+                gallery: [
+                    "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1600&q=80",
+                    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80"
+                ]
+            }
+        ];
     }
 
     // ---- Populate page meta ----
@@ -105,125 +146,173 @@
     });
 
     // ============================================================
-    //  LIGHTBOX
+    //  3D FLIP-BOOK MODAL
     // ============================================================
-    const lightbox  = document.getElementById('lightbox');
-    const lbBackdrop = document.getElementById('lbBackdrop');
-    const lbClose   = document.getElementById('lbClose');
-    const lbPrev    = document.getElementById('lbPrev');
-    const lbNext    = document.getElementById('lbNext');
-    const lbImage   = document.getElementById('lbImage');
-    const lbLoading = document.getElementById('lbLoading');
-    const lbCat     = document.getElementById('lbCat');
-    const lbTitle   = document.getElementById('lbTitleText');
-    const lbYear    = document.getElementById('lbYear');
-    const lbLoc     = document.getElementById('lbLoc');
-    const lbDesc    = document.getElementById('lbDesc');
-    const lbCounter = document.getElementById('lbCounter');
+    const fbModal   = document.getElementById('fbModal');
+    const fbBackdrop= document.getElementById('fbBackdrop');
+    const fbClose   = document.getElementById('fbClose');
+    const fbPrev    = document.getElementById('fbPrev');
+    const fbNext    = document.getElementById('fbNext');
+    const fbBook    = document.getElementById('fbBook');
+    const fbCat     = document.getElementById('fbCat');
+    const fbTitle   = document.getElementById('fbTitle');
+    const fbYear    = document.getElementById('fbYear');
+    const fbLoc     = document.getElementById('fbLoc');
+    const fbCounter = document.getElementById('fbCounter');
+    const fbProjPrev= document.getElementById('fbProjPrev');
+    const fbProjNext= document.getElementById('fbProjNext');
 
     let currentProjectIndex = 0;
     let currentGalleryIndex = 0;
+    let isFlipping = false;
     const projects = svcData.projects;
 
     function openLightbox(index) {
         currentProjectIndex = index;
-        currentGalleryIndex = 0; // always open at first photo
-        renderSlide(currentProjectIndex, currentGalleryIndex);
-        lightbox.hidden = false;
-        lightbox.classList.add('lb-visible');
+        currentGalleryIndex = 0;
+        
+        fbModal.hidden = false;
         document.body.style.overflow = 'hidden';
-        lbClose.focus();
+        fbClose.focus();
+        
+        buildBook();
+        updateUI();
     }
 
     function closeLightbox() {
-        lightbox.hidden = true;
-        lightbox.classList.remove('lb-visible');
+        fbModal.hidden = true;
         document.body.style.overflow = '';
-        // Return focus to the card that opened the lightbox
         const card = grid.querySelector(`[data-index="${currentProjectIndex}"]`);
         if (card) card.focus();
+        
+        // Clear book memory
+        fbBook.innerHTML = '';
     }
 
-    function renderSlide(projIndex, galIndex) {
-        const proj = projects[projIndex];
-        const gallery = proj.gallery || [];
-        const totalPhotos = gallery.length;
-        const currentImgSrc = gallery[galIndex] || proj.thumbnail;
+    function buildBook() {
+        fbBook.innerHTML = '';
+        const proj = projects[currentProjectIndex];
+        const gallery = proj.gallery && proj.gallery.length > 0 ? proj.gallery : [proj.thumbnail];
+        
+        // Build pages in reverse so the first page is on top (highest z-index)
+        gallery.forEach((src, idx) => {
+            const page = document.createElement('div');
+            page.className = 'fb-page';
+            page.style.zIndex = gallery.length - idx;
+            
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `${proj.title} - Image ${idx + 1}`;
+            
+            // Flipped state if we start somewhere else (though we start at 0)
+            if (idx < currentGalleryIndex) {
+                page.classList.add('flipped');
+            }
 
-        // Show loading
-        lbLoading.classList.remove('hidden');
-        lbImage.classList.add('loading');
-
-        // Load image
-        const img = new Image();
-        img.src = currentImgSrc;
-        img.onload = () => {
-            lbImage.src = currentImgSrc;
-            lbImage.alt = proj.title;
-            lbImage.classList.remove('loading');
-            lbLoading.classList.add('hidden');
-        };
-        img.onerror = () => {
-            lbLoading.classList.add('hidden');
-        };
-
-        // Populate caption
-        lbCat.textContent   = proj.category;
-        lbTitle.textContent = proj.title;
-        lbYear.innerHTML    = `<i class="fa-regular fa-calendar"></i> ${proj.year}`;
-        lbLoc.innerHTML     = `<i class="fa-solid fa-location-dot"></i> ${proj.location}`;
-        lbDesc.textContent  = proj.description;
-        lbCounter.textContent = `${galIndex + 1} of ${totalPhotos}`;
-
-        // Update arrow states (disable if at start or end of gallery)
-        lbPrev.disabled = galIndex === 0;
-        lbNext.disabled = galIndex === totalPhotos - 1;
+            page.appendChild(img);
+            fbBook.appendChild(page);
+        });
     }
 
-    function prevSlide() {
-        if (currentGalleryIndex > 0) {
-            currentGalleryIndex--;
-            renderSlide(currentProjectIndex, currentGalleryIndex);
+    function updateUI() {
+        const proj = projects[currentProjectIndex];
+        const totalPhotos = proj.gallery && proj.gallery.length > 0 ? proj.gallery.length : 1;
+
+        // Info
+        fbCat.textContent = proj.category;
+        fbTitle.textContent = proj.title;
+        fbYear.innerHTML = `<i class="fa-regular fa-calendar"></i> ${proj.year}`;
+        fbLoc.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${proj.location}`;
+        fbCounter.textContent = `${currentGalleryIndex + 1} / ${totalPhotos}`;
+
+        // Page Arrows
+        fbPrev.disabled = currentGalleryIndex === 0;
+        fbNext.disabled = currentGalleryIndex === totalPhotos - 1;
+
+        // Project Arrows
+        fbProjPrev.disabled = currentProjectIndex === 0;
+        fbProjNext.disabled = currentProjectIndex === projects.length - 1;
+    }
+
+    function turnPageNext() {
+        if (isFlipping) return;
+        const proj = projects[currentProjectIndex];
+        const totalPhotos = proj.gallery && proj.gallery.length > 0 ? proj.gallery.length : 1;
+        
+        if (currentGalleryIndex < totalPhotos - 1) {
+            isFlipping = true;
+            // The page to flip is the current one
+            const pages = fbBook.querySelectorAll('.fb-page');
+            const pageToFlip = pages[currentGalleryIndex];
+            pageToFlip.classList.add('flipped');
+            
+            currentGalleryIndex++;
+            updateUI();
+            
+            setTimeout(() => isFlipping = false, 800); // matches CSS transition
         }
     }
 
-    function nextSlide() {
-        const proj = projects[currentProjectIndex];
-        const totalPhotos = proj.gallery ? proj.gallery.length : 1;
-        if (currentGalleryIndex < totalPhotos - 1) {
-            currentGalleryIndex++;
-            renderSlide(currentProjectIndex, currentGalleryIndex);
+    function turnPagePrev() {
+        if (isFlipping) return;
+        
+        if (currentGalleryIndex > 0) {
+            isFlipping = true;
+            currentGalleryIndex--;
+            
+            // The page to un-flip is the new current one
+            const pages = fbBook.querySelectorAll('.fb-page');
+            const pageToUnflip = pages[currentGalleryIndex];
+            pageToUnflip.classList.remove('flipped');
+            
+            updateUI();
+            
+            setTimeout(() => isFlipping = false, 800); // matches CSS transition
+        }
+    }
+
+    function prevProject() {
+        if (currentProjectIndex > 0) {
+            openLightbox(currentProjectIndex - 1);
+        }
+    }
+
+    function nextProject() {
+        if (currentProjectIndex < projects.length - 1) {
+            openLightbox(currentProjectIndex + 1);
         }
     }
 
     // ---- Event Listeners ----
-    lbClose.addEventListener('click', closeLightbox);
-    lbBackdrop.addEventListener('click', closeLightbox);
-    lbPrev.addEventListener('click', prevSlide);
-    lbNext.addEventListener('click', nextSlide);
+    fbClose.addEventListener('click', closeLightbox);
+    fbBackdrop.addEventListener('click', closeLightbox);
+    fbPrev.addEventListener('click', turnPagePrev);
+    fbNext.addEventListener('click', turnPageNext);
+    fbProjPrev.addEventListener('click', prevProject);
+    fbProjNext.addEventListener('click', nextProject);
 
     // Keyboard navigation
     document.addEventListener('keydown', e => {
-        if (lightbox.hidden) return;
+        if (fbModal.hidden) return;
         if (e.key === 'Escape')      closeLightbox();
-        if (e.key === 'ArrowLeft')   prevSlide();
-        if (e.key === 'ArrowRight')  nextSlide();
+        if (e.key === 'ArrowLeft')   turnPagePrev();
+        if (e.key === 'ArrowRight')  turnPageNext();
     });
 
     // Touch/swipe support for mobile
     let touchStartX = 0;
-    const lbStage = document.querySelector('.lb-stage');
+    const fbStage = document.getElementById('fbStage');
 
-    if (lbStage) {
-        lbStage.addEventListener('touchstart', e => {
+    if (fbStage) {
+        fbStage.addEventListener('touchstart', e => {
             touchStartX = e.touches[0].clientX;
         }, { passive: true });
 
-        lbStage.addEventListener('touchend', e => {
+        fbStage.addEventListener('touchend', e => {
             const diff = touchStartX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 50) {
-                if (diff > 0) nextSlide();
-                else          prevSlide();
+                if (diff > 0) turnPageNext();
+                else          turnPagePrev();
             }
         }, { passive: true });
     }
@@ -245,9 +334,10 @@
     // ============================================================
     //  Focus trap inside lightbox for accessibility
     // ============================================================
-    lightbox.addEventListener('keydown', e => {
+    fbModal.addEventListener('keydown', e => {
         if (e.key !== 'Tab') return;
-        const focusable = lightbox.querySelectorAll('button:not(:disabled), a, [tabindex="0"]');
+        const focusable = fbModal.querySelectorAll('button:not(:disabled), a, [tabindex="0"]');
+        if (!focusable.length) return;
         const first = focusable[0];
         const last  = focusable[focusable.length - 1];
         if (e.shiftKey) {
